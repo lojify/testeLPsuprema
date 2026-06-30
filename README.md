@@ -1,32 +1,35 @@
-# KAOS//STUDIO — Template "Portfólio Criativo"
-Caos controlado · vanguarda · 60fps
+# Método Acelerador — Template de Lançamento de Infoproduto
+
+Template autônomo (HTML/CSS/JS) pronto para revenda, focado em urgência extrema e conversão.
 
 ## Estrutura
+
 ```
-index.html        → marcação semântica, trilha horizontal com 5 painéis
-style.css          → tokens de design, layout, glitch, cursor, responsivo, reduced-motion
-script.js          → Lenis + GSAP/ScrollTrigger + cursor + glitch + áudio sintetizado
-assets/img/        → grain.svg (textura), cursor-brush.svg, cursor-pixel.svg, imagens de demo via picsum.photos
-assets/audio/      → README.md explicando como plugar Howler.js com arquivos reais
+index.html
+style.css
+js/
+  env.js              -> detecção de isMobile / prefersReducedMotion
+  lenis-init.js        -> smooth scroll integrado ao GSAP
+  countdown.js         -> contadores regressivos (data-deadline)
+  gsap-animations.js   -> reveals, "explosão", contagem crescente
+  cursor.js            -> cursor customizado (seta -> foguete)
+  audio.js             -> Howler.js (trilha, clique, sucesso)
+  lazy-load.js         -> Intersection Observer para vídeo pesado
+  ui.js                -> acordeão FAQ, barra de escassez, progress bar
+  main.js              -> ponto de entrada que orquestra tudo
+assets/                -> imagens, vídeos e áudios (adicionar os arquivos reais)
 ```
 
-## Como rodar
-Basta abrir `index.html` num navegador (ou servir a pasta com qualquer
-servidor estático). As imagens de demonstração vêm de `picsum.photos` —
-troque os `src` em `index.html` pelas fotos reais do portfólio quando for
-para produção.
+## Antes de publicar
 
-## Pontos de customização rápida
-- **Paleta:** variáveis `--bg`, `--acc-pink`, `--acc-cyan`, `--acc-yellow` no topo do `style.css`.
-- **Fontes:** trocar os links `Unbounded` / `Space Grotesk` / `JetBrains Mono` no `<head>`.
-- **Número de seções da trilha horizontal:** adicionar/remover `<section class="panel">` dentro de `#track` — o JS recalcula a distância de scroll automaticamente (`invalidateOnRefresh: true`).
-- **Áudio real:** ver `assets/audio/README.md`.
-- **Cursor:** os SVGs em `assets/img/` são referência visual; o cursor ativo em tela é desenhado via canvas/CSS no `script.js` (mais performático que trocar a imagem do cursor do SO).
+1. Substitua os arquivos em `assets/` pelos ativos reais (em WebP/AVIF para imagens, MP4/WebM para vídeo, MP3 para áudio), mantendo os mesmos nomes ou atualizando os caminhos no HTML/JS.
+2. Ajuste `data-deadline` (em `index.html`) para a data real do seu lançamento, no formato ISO com timezone, ex: `2026-07-07T23:59:59-03:00`.
+3. Atualize `data-total` / `data-filled` na barra de escassez (`.scarcity-bar`) com os números reais de vagas.
+4. Troque os textos de prova social, oferta e FAQ pelo conteúdo real do seu produto.
+5. Minifique `style.css` e os arquivos em `js/` antes de subir para produção (ex: via `esbuild`, `terser` ou seu bundler preferido), e sirva com Gzip/Brotli.
+6. Conecte o link do botão de oferta (`data-cta="offer"`) ao seu checkout real.
 
-## Performance / acessibilidade já implementadas
-- Todas as animações usam apenas `transform` e `opacity` (GPU).
-- `prefers-reduced-motion`: desativa scroll horizontal, cursor customizado, glitch, distorção e marquee — a página vira uma rolagem vertical simples com fade básico.
-- Mobile (`<768px`): mesma lógica de fallback + sem cursor customizado + animações mais curtas.
-- `loading="lazy"` + `decoding="async"` nas imagens de trabalho.
-- `ScrollTrigger` com `invalidateOnRefresh: true` e `pinType: "transform"`.
-- Scripts de terceiros com `defer`.
+## Comportamento responsivo e de acessibilidade
+
+- Com `prefers-reduced-motion: reduce` ativado no sistema, todas as animações complexas (explosão, pulso, salto, cursor customizado) são desativadas automaticamente, mantendo apenas fades simples.
+- Em telas menores que 768px, o cursor customizado é desativado, a duração das animações GSAP é reduzida em 50%, e o contador do header é ocultado para economizar espaço.
