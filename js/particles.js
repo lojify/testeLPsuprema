@@ -1,4 +1,4 @@
-// particles.js — Three.js: partículas sutis de fundo no hero
+// particles.js — Three.js: partículas de poeira urbana no hero
 import { state } from './config.js';
 
 export function initParticles() {
@@ -16,22 +16,24 @@ export function initParticles() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const particleCount = 220;
+  const particleCount = 200;
   const positions = new Float32Array(particleCount * 3);
+  const speeds = new Float32Array(particleCount);
   for (let i = 0; i < particleCount; i++) {
     positions[i * 3] = (Math.random() - 0.5) * 14;
     positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
     positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
+    speeds[i] = 0.0008 + Math.random() * 0.0015;
   }
 
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
   const material = new THREE.PointsMaterial({
-    color: 0xc9a86a,
-    size: 0.025,
+    color: 0xcccccc,
+    size: 0.022,
     transparent: true,
-    opacity: 0.55,
+    opacity: 0.35,
   });
 
   const points = new THREE.Points(geometry, material);
@@ -39,8 +41,13 @@ export function initParticles() {
 
   let rafId;
   function animate() {
-    points.rotation.y += 0.0006;
-    points.rotation.x += 0.0002;
+    const posAttr = geometry.attributes.position;
+    for (let i = 0; i < particleCount; i++) {
+      posAttr.array[i * 3 + 1] += speeds[i]; // deriva lenta para cima (poeira subindo)
+      if (posAttr.array[i * 3 + 1] > 4) posAttr.array[i * 3 + 1] = -4;
+    }
+    posAttr.needsUpdate = true;
+    points.rotation.y += 0.0003;
     renderer.render(scene, camera);
     rafId = requestAnimationFrame(animate);
   }
@@ -52,7 +59,6 @@ export function initParticles() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // Pausa o render quando o hero sai da viewport (economiza GPU)
   const heroSection = document.getElementById('hero');
   if ('IntersectionObserver' in window && heroSection) {
     const observer = new IntersectionObserver((entries) => {

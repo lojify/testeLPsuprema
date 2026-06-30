@@ -1,8 +1,9 @@
-// audio.js — Howler.js: trilha ambiente + clique discreto
+// audio.js — Howler.js: trilha hip-hop lo-fi + efeitos urbanos contextuais
 import { state } from './config.js';
 
 let ambientTrack = null;
-let clickSound = null;
+let cutSound = null;
+let razorSound = null;
 let isPlaying = false;
 
 const toggleBtn = document.getElementById('audioToggle');
@@ -11,15 +12,20 @@ export function initAudio() {
   if (!window.Howl) return;
 
   ambientTrack = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2022/03/10/audio_d1718ab41b.mp3'],
+    src: ['https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3'],
     loop: true,
     volume: 0.15,
     html5: true,
   });
 
-  clickSound = new Howl({
+  cutSound = new Howl({
+    src: ['https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3'],
+    volume: 0.2,
+  });
+
+  razorSound = new Howl({
     src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_942d1f4cba.mp3'],
-    volume: 0.25,
+    volume: 0.2,
   });
 
   if (toggleBtn) {
@@ -35,11 +41,13 @@ export function initAudio() {
     });
   }
 
-  // Som de clique discreto em CTAs — não dispara em mobile para evitar travamento de áudio
+  // Sons contextuais nos cards de serviço, desativados em mobile (evita travar áudio em touch)
   if (!state.isMobile) {
-    document.querySelectorAll('.btn, .btn-whatsapp, .nav__cta').forEach((el) => {
-      el.addEventListener('click', () => {
-        if (clickSound) clickSound.play();
+    document.querySelectorAll('[data-sound]').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        const type = el.getAttribute('data-sound');
+        if (type === 'razor' && razorSound) razorSound.play();
+        else if (cutSound) cutSound.play();
       });
     });
   }
