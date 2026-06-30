@@ -1,16 +1,18 @@
-// cursor.js — Cursor customizado: ponto de luz sutil, vira "folha dourada" sobre elementos clicáveis
+// cursor.js — Cursor customizado "ponto de foco" com lerp/easing
 import { state } from './config.js';
 
-const glow = document.getElementById('cursorGlow');
-const leaf = document.getElementById('cursorLeaf');
+const dot = document.querySelector('.cursor-dot');
+const ring = document.querySelector('.cursor-ring');
+
+// Desativa completamente em mobile/touch ou reduced motion
 const isTouch = matchMedia('(pointer: coarse)').matches;
 
-if (state.isMobile || state.prefersReducedMotion || isTouch || !glow || !leaf) {
+if (state.isMobile || state.prefersReducedMotion || isTouch || !dot || !ring) {
   document.body.classList.add('cursor-disabled');
 } else {
   let mouseX = 0, mouseY = 0;
-  let glowX = 0, glowY = 0;
-  let leafX = 0, leafY = 0;
+  let dotX = 0, dotY = 0;
+  let ringX = 0, ringY = 0;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -22,28 +24,37 @@ if (state.isMobile || state.prefersReducedMotion || isTouch || !glow || !leaf) {
     document.body.classList.add('cursor-hidden');
   });
 
-  // Lerp suave — movimento "lento" condizente com a identidade calma da marca
+  // Lerp manual via rAF — apenas transform, sem layout thrashing
   function animateCursor() {
-    glowX += (mouseX - glowX) * 0.18;
-    glowY += (mouseY - glowY) * 0.18;
-    leafX += (mouseX - leafX) * 0.14;
-    leafY += (mouseY - leafY) * 0.14;
+    dotX += (mouseX - dotX) * 0.35;
+    dotY += (mouseY - dotY) * 0.35;
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
 
-    glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
-    leaf.style.transform = `translate(${leafX}px, ${leafY}px) translate(-50%, -50%)`;
+    dot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
 
     requestAnimationFrame(animateCursor);
   }
   requestAnimationFrame(animateCursor);
 
-  document.querySelectorAll('a, button, [data-cursor-leaf], input, textarea').forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      leaf.classList.add('is-active');
-      glow.classList.add('is-hidden-by-leaf');
+  // Estado "ativo" em elementos clicáveis
+  const interactiveSelectors = 'a, button, [data-magnetic], input, textarea';
+  document.querySelectorAll(interactiveSelectors).forEach((el) => {
+    el.addEventListener('mouseenter', () => ring.classList.add('is-active'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('is-active'));
+  });
+
+  // Efeito magnético sutil em CTAs (apenas transform)
+  document.querySelectorAll('[data-magnetic]').forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const relX = (e.clientX - rect.left - rect.width / 2) * 0.18;
+      const relY = (e.clientY - rect.top - rect.height / 2) * 0.18;
+      el.style.transform = `translate(${relX}px, ${relY}px)`;
     });
     el.addEventListener('mouseleave', () => {
-      leaf.classList.remove('is-active');
-      glow.classList.remove('is-hidden-by-leaf');
+      el.style.transform = 'translate(0, 0)';
     });
   });
 }

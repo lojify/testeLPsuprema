@@ -1,16 +1,17 @@
-// scroll.js — Lenis Scroll integrado ao GSAP ticker (easing mais lento, condizente com a marca)
+// scroll.js — Lenis Scroll integrado ao GSAP ticker
 import { state } from './config.js';
 
 export let lenis = null;
 
 export function initScroll() {
+  // Em reduced-motion, mantemos o scroll nativo do navegador (mais previsível e acessível)
   if (state.prefersReducedMotion) return null;
 
   lenis = new Lenis({
-    duration: state.isMobile ? 0.9 : 1.3,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -9 * t)),
+    duration: state.isMobile ? 0.8 : 1.1,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    syncTouch: false,
+    syncTouch: false, // evita conflito com scroll nativo em touch
   });
 
   function raf(time) {
@@ -19,6 +20,7 @@ export function initScroll() {
   }
   requestAnimationFrame(raf);
 
+  // Mantém o GSAP/ScrollTrigger sincronizado com o Lenis
   if (window.gsap && window.ScrollTrigger) {
     lenis.on('scroll', window.ScrollTrigger.update);
     window.gsap.ticker.add((time) => {
