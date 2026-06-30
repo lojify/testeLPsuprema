@@ -1,55 +1,59 @@
-// cursor.js — Cursor customizado: navalha estilizada, troca para spray sobre botões com efeito spray
-import { state } from './config.js';
+// js/cursor.js
+// Cursor customizado: faca de chef / folha de manjericão / luz âmbar
+// Desativado em mobile e prefers-reduced-motion.
 
-const cursor = document.getElementById('cursorIcon');
-const isTouch = matchMedia('(pointer: coarse)').matches;
+export function initCursor({ isMobile, prefersReducedMotion }) {
+  if (isMobile || prefersReducedMotion) return;
 
-if (state.isMobile || state.prefersReducedMotion || isTouch || !cursor) {
-  document.body.classList.add('cursor-disabled');
-} else {
-  let mouseX = 0, mouseY = 0;
-  let curX = 0, curY = 0;
-  let lastX = 0;
+  const cursor = document.getElementById("custom-cursor");
+  if (!cursor) return;
 
-  window.addEventListener('mousemove', (e) => {
+  document.body.classList.add("cursor-ativo");
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let curX = mouseX;
+  let curY = mouseY;
+
+  window.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    document.body.classList.remove('cursor-hidden');
   });
 
-  document.addEventListener('mouseleave', () => {
-    document.body.classList.add('cursor-hidden');
-  });
-
-  function animateCursor() {
-    const dx = mouseX - curX;
-    curX += dx * 0.5;
-    curY += (mouseY - curY) * 0.5;
-
-    // leve rotação baseada na direção do movimento (apenas transform)
-    const rotation = Math.max(-25, Math.min(25, dx * 1.5));
-
-    cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%) rotate(${rotation}deg)`;
-    lastX = mouseX;
-
-    requestAnimationFrame(animateCursor);
+  function loop() {
+    // leve suavização (lerp) sem reflow — apenas transform
+    curX += (mouseX - curX) * 0.35;
+    curY += (mouseY - curY) * 0.35;
+    cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(loop);
   }
-  requestAnimationFrame(animateCursor);
+  requestAnimationFrame(loop);
 
-  // Troca para ícone de spray sobre elementos com efeito spray
-  document.querySelectorAll('[data-spray]').forEach((el) => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('is-spray'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('is-spray'));
+  // troca de estado via data-cursor
+  const estados = ["faca", "folha", "luz"];
+
+  function setEstado(estado) {
+    estados.forEach((e) => cursor.classList.remove(`estado-${e}`));
+    cursor.classList.add(`estado-${estado}`);
+  }
+
+  setEstado("luz");
+
+  document.querySelectorAll("[data-cursor]").forEach((el) => {
+    el.addEventListener("mouseenter", () => setEstado(el.dataset.cursor));
+    el.addEventListener("mouseleave", () => setEstado("luz"));
   });
 
-  // Atualiza a posição do "spray" (variáveis CSS) relativa a cada botão no hover
-  document.querySelectorAll('[data-spray]').forEach((el) => {
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      el.style.setProperty('--spray-x', `${x}%`);
-      el.style.setProperty('--spray-y', `${y}%`);
-    });
+  // pratos / imagens usam a faca por padrão
+  document.querySelectorAll(".prato-card-img, .historia-media img, .prato-canvas-wrap").forEach((el) => {
+    el.addEventListener("mouseenter", () => setEstado("faca"));
+    el.addEventListener("mouseleave", () => setEstado("luz"));
+  });
+
+  document.addEventListener("mouseleave", () => {
+    cursor.style.opacity = "0";
+  });
+  document.addEventListener("mouseenter", () => {
+    cursor.style.opacity = "1";
   });
 }

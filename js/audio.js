@@ -1,54 +1,93 @@
-// audio.js — Howler.js: trilha hip-hop lo-fi + efeitos urbanos contextuais
-import { state } from './config.js';
+// js/audio.js
+// Trilha ambiente + efeitos sonoros via Howler.js
+// Áudio só inicia após interação do usuário (autoplay policy).
 
-let ambientTrack = null;
-let cutSound = null;
-let razorSound = null;
-let isPlaying = false;
+let bgMusic = null;
+let sfx = {};
+let isMuted = true;
+let started = false;
+let lastSfxPlay = {};
 
-const toggleBtn = document.getElementById('audioToggle');
+const SFX_DEBOUNCE_MS = 350;
 
 export function initAudio() {
-  if (!window.Howl) return;
+  if (typeof Howl === "undefined") return null;
 
-  ambientTrack = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3'],
+  bgMusic = new Howl({
+    src: ["https://cdn.pixabay.com/audio/2022/03/15/audio_1e2efb2dc4.mp3"],
     loop: true,
-    volume: 0.15,
+    volume: 0.0,
     html5: true,
   });
 
-  cutSound = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3'],
-    volume: 0.2,
-  });
+  sfx = {
+    chiado: new Howl({
+      src: ["https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3"],
+      volume: 0.25,
+    }),
+    borbulhar: new Howl({
+      src: ["https://cdn.pixabay.com/audio/2022/03/10/audio_c8e3578620.mp3"],
+      volume: 0.2,
+    }),
+    taças: new Howl({
+      src: ["https://cdn.pixabay.com/audio/2021/08/09/audio_88447e769f.mp3"],
+      volume: 0.25,
+    }),
+  };
 
-  razorSound = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_942d1f4cba.mp3'],
-    volume: 0.2,
-  });
+  const toggleBtn = document.getElementById("audio-toggle");
+
+  function startOnFirstInteraction() {
+    if (started) return;
+    started = true;
+    bgMusic.play();
+    bgMusic.fade(0, 0.18, 1200);
+    setMuted(false);
+    window.removeEventListener("click", startOnFirstInteraction);
+    window.removeEventListener("scroll", startOnFirstInteraction);
+  }
+  window.addEventListener("click", startOnFirstInteraction, { once: true });
+  window.addEventListener("scroll", startOnFirstInteraction, { once: true });
+
+  function setMuted(mute) {
+    isMuted = mute;
+    if (mute) {
+      bgMusic.fade(bgMusic.volume(), 0, 400);
+    } else {
+      bgMusic.fade(bgMusic.volume(), 0.18, 400);
+    }
+    if (toggleBtn) toggleBtn.setAttribute("aria-pressed", String(!mute));
+  }
 
   if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        ambientTrack.pause();
-        toggleBtn.setAttribute('aria-pressed', 'false');
-      } else {
-        ambientTrack.play();
-        toggleBtn.setAttribute('aria-pressed', 'true');
+    toggleBtn.addEventListener("click", () => {
+      if (!started) {
+        startOnFirstInteraction();
+        return;
       }
-      isPlaying = !isPlaying;
+      setMuted(!isMuted);
     });
   }
 
-  // Sons contextuais nos cards de serviço, desativados em mobile (evita travar áudio em touch)
-  if (!state.isMobile) {
-    document.querySelectorAll('[data-sound]').forEach((el) => {
-      el.addEventListener('mouseenter', () => {
-        const type = el.getAttribute('data-sound');
-        if (type === 'razor' && razorSound) razorSound.play();
-        else if (cutSound) cutSound.play();
-      });
-    });
-  }
+  return { setMuted };
+}
+
+export function playSfx(name) {
+  if (!sfx[name] || isMuted) return;
+  const now = Date.now();
+  if (lastSfxPlay[name] && now - lastSfxPlay[name] < SFX_DEBOUNCE_MS) return;
+  lastSfxPlay[name] = now;
+  sfx[name].play();
+}
+
+export function bindSfxHovers() {
+  document.querySelectorAll(".prato-card.is-quente").forEach((card) => {
+    card.addEventListener("mouseenter", () => playSfx("chiado"));
+  });
+  document.querySelectorAll('[data-categoria="bebidas"]').forEach((card) => {
+    card.addEventListener("mouseenter", () => playSfx("borbulhar"));
+  });
+  document.querySelectorAll(".depoimento-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => playSfx("taças"));
+  });
 }
