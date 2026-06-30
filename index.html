@@ -177,10 +177,27 @@
   </div>
 </main>
 
+<!-- Rede de segurança independente de qualquer CDN: garante que o loader
+     NUNCA fique preso na tela, mesmo se script.js/GSAP/Lenis falharem. -->
+<script>
+  setTimeout(function () {
+    var loader = document.getElementById("loader");
+    if (loader && document.body.classList.contains("is-loading")) {
+      document.body.classList.remove("is-loading");
+      loader.style.transition = "opacity .4s ease";
+      loader.style.opacity = "0";
+      loader.style.pointerEvents = "none";
+      document.querySelectorAll(".glitch-title, .panel__desc, .panel__eyebrow, .scroll-cue")
+        .forEach(function (el) { el.style.opacity = "1"; el.style.visibility = "visible"; });
+      setTimeout(function () { loader.remove(); }, 500);
+    }
+  }, 5000);
+</script>
+
 <!-- ===== SCRIPTS (defer / async para não bloquear o parse) ===== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
 <script src="script.js" defer></script>
 </body>

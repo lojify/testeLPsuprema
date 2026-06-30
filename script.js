@@ -8,7 +8,13 @@
 (() => {
   "use strict";
 
-  gsap.registerPlugin(ScrollTrigger);
+  if (typeof gsap === "undefined") {
+    console.error("[KAOS//STUDIO] GSAP não carregou — abortando animações avançadas.");
+    document.body.classList.remove("is-loading");
+    document.getElementById("loader")?.remove();
+    return;
+  }
+  if (typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
   /* ------------------------------------------------------------------
      0. DETECÇÃO DE AMBIENTE
@@ -56,6 +62,10 @@
   let lenis = null;
   function initLenis() {
     if (prefersReducedMotion) return; // scroll nativo é suficiente e mais previsível
+    if (typeof Lenis === "undefined") {
+      console.warn("[KAOS//STUDIO] Lenis não carregou — usando scroll nativo.");
+      return;
+    }
     lenis = new Lenis({
       duration: isMobile ? 0.8 : 1.15,
       smoothWheel: true,
@@ -378,17 +388,46 @@
 
   /* ------------------------------------------------------------------
      10. INIT
+     Cada função roda isolada em try/catch: se um CDN falhar ou um
+     módulo quebrar, os demais continuam funcionando normalmente.
+     Um timeout de segurança garante que o loader NUNCA fique preso
+     na tela, mesmo se algo der errado.
   ------------------------------------------------------------------ */
-  window.addEventListener("DOMContentLoaded", () => {
-    initLenis();
-    initHorizontalScroll();
-    initVerticalProgressFallback();
-    initGlitch();
-    initCursor();
-    initAudio();
-    initMarquee();
-    initLoader();
+  function safeRun(fn, label) {
+    try {
+      fn();
+    } catch (err) {
+      console.error(`[KAOS//STUDIO] Falha em ${label}:`, err);
+    }
+  }
 
-    window.addEventListener("load", () => ScrollTrigger.refresh());
+  window.addEventListener("DOMContentLoaded", () => {
+    safeRun(initLenis, "initLenis");
+    safeRun(initHorizontalScroll, "initHorizontalScroll");
+    safeRun(initVerticalProgressFallback, "initVerticalProgressFallback");
+    safeRun(initGlitch, "initGlitch");
+    safeRun(initCursor, "initCursor");
+    safeRun(initAudio, "initAudio");
+    safeRun(initMarquee, "initMarquee");
+    safeRun(initLoader, "initLoader");
+
+    // rede de segurança: se por algum motivo o loader não terminar
+    // sozinho (ex.: GSAP falhou ao carregar), força a remoção em 4s
+    // para o conteúdo nunca ficar preso atrás dele.
+    setTimeout(() => {
+      const loader = document.getElementById("loader");
+      if (loader) {
+        document.body.classList.remove("is-loading");
+        loader.style.opacity = "0";
+        loader.style.pointerEvents = "none";
+        document.querySelectorAll(".glitch-title, .panel__desc, .panel__eyebrow, .scroll-cue")
+          .forEach((el) => { el.style.opacity = "1"; el.style.visibility = "visible"; });
+        setTimeout(() => loader.remove(), 600);
+      }
+    }, 4000);
+
+    window.addEventListener("load", () => {
+      if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+    });
   });
 })();
