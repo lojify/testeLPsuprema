@@ -1,76 +1,66 @@
-// particles.js — Three.js: partículas de poeira urbana no hero
+// particles.js — Canvas 2D leve: partículas de brilho dourado/branco com opacidade pulsante
 import { state } from './config.js';
 
 export function initParticles() {
-  const canvas = document.getElementById('heroCanvas');
-  if (!canvas || state.isMobile || state.prefersReducedMotion || !window.THREE) {
+  const canvas = document.getElementById('glowCanvas');
+  if (!canvas || state.isMobile || state.prefersReducedMotion) {
     if (canvas) canvas.style.display = 'none';
     return;
   }
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 6;
+  const ctx = canvas.getContext('2d');
+  let width, height, particles, rafId;
+  const PARTICLE_COUNT = 36;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-  const particleCount = 200;
-  const positions = new Float32Array(particleCount * 3);
-  const speeds = new Float32Array(particleCount);
-  for (let i = 0; i < particleCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 14;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
-    speeds[i] = 0.0008 + Math.random() * 0.0015;
+  function createParticle() {
+    return {
+      x: Math.random() * width,
+      y: height + Math.random() * 100,
+      radius: 0.8 + Math.random() * 1.8,
+      speed: 0.12 + Math.random() * 0.25,
+      baseOpacity: 0.15 + Math.random() * 0.35,
+      phase: Math.random() * Math.PI * 2,
+      color: Math.random() > 0.5 ? '185,152,106' : '255,255,255',
+    };
   }
 
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  particles = Array.from({ length: PARTICLE_COUNT }, createParticle);
 
-  const material = new THREE.PointsMaterial({
-    color: 0xcccccc,
-    size: 0.022,
-    transparent: true,
-    opacity: 0.35,
-  });
-
-  const points = new THREE.Points(geometry, material);
-  scene.add(points);
-
-  let rafId;
+  let time = 0;
   function animate() {
-    const posAttr = geometry.attributes.position;
-    for (let i = 0; i < particleCount; i++) {
-      posAttr.array[i * 3 + 1] += speeds[i]; // deriva lenta para cima (poeira subindo)
-      if (posAttr.array[i * 3 + 1] > 4) posAttr.array[i * 3 + 1] = -4;
-    }
-    posAttr.needsUpdate = true;
-    points.rotation.y += 0.0003;
-    renderer.render(scene, camera);
+    time += 0.016;
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((p) => {
+      p.y -= p.speed; // deriva lenta ascendente
+      if (p.y < -20) {
+        Object.assign(p, createParticle());
+        p.y = height + 20;
+      }
+      const pulsedOpacity = p.baseOpacity * (0.6 + 0.4 * Math.sin(time * 1.2 + p.phase));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color}, ${pulsedOpacity})`;
+      ctx.fill();
+    });
+
     rafId = requestAnimationFrame(animate);
   }
   animate();
 
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  // Pausa quando a aba não está visível, economizando recursos
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+    } else {
+      animate();
+    }
   });
-
-  const heroSection = document.getElementById('hero');
-  if ('IntersectionObserver' in window && heroSection) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!rafId) animate();
-        } else {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      });
-    }, { threshold: 0.05 });
-    observer.observe(heroSection);
-  }
 }

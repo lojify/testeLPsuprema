@@ -1,10 +1,10 @@
-// audio.js — Howler.js: trilha hip-hop lo-fi + efeitos urbanos contextuais
+// audio.js — Howler.js: música ambiente relaxante + água/sinos de vento discretos
 import { state } from './config.js';
 
 let ambientTrack = null;
-let cutSound = null;
-let razorSound = null;
+let chimeSound = null;
 let isPlaying = false;
+const visitedSections = new Set();
 
 const toggleBtn = document.getElementById('audioToggle');
 
@@ -12,20 +12,15 @@ export function initAudio() {
   if (!window.Howl) return;
 
   ambientTrack = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3'],
+    src: ['https://cdn.pixabay.com/download/audio/2022/05/16/audio_db6591201f.mp3'],
     loop: true,
-    volume: 0.15,
+    volume: 0.12,
     html5: true,
   });
 
-  cutSound = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3'],
-    volume: 0.2,
-  });
-
-  razorSound = new Howl({
-    src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_942d1f4cba.mp3'],
-    volume: 0.2,
+  chimeSound = new Howl({
+    src: ['https://cdn.pixabay.com/download/audio/2021/10/15/audio_56cd87f9c6.mp3'],
+    volume: 0.15,
   });
 
   if (toggleBtn) {
@@ -41,14 +36,20 @@ export function initAudio() {
     });
   }
 
-  // Sons contextuais nos cards de serviço, desativados em mobile (evita travar áudio em touch)
-  if (!state.isMobile) {
-    document.querySelectorAll('[data-sound]').forEach((el) => {
-      el.addEventListener('mouseenter', () => {
-        const type = el.getAttribute('data-sound');
-        if (type === 'razor' && razorSound) razorSound.play();
-        else if (cutSound) cutSound.play();
-      });
-    });
+  // Sino de vento discreto ao entrar em seções-chave (apenas uma vez por seção, apenas desktop)
+  if (!state.isMobile && 'IntersectionObserver' in window) {
+    const chimeSections = document.querySelectorAll('#tratamentos, #oferta');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && isPlaying && !visitedSections.has(entry.target.id)) {
+            visitedSections.add(entry.target.id);
+            if (chimeSound) chimeSound.play();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    chimeSections.forEach((s) => observer.observe(s));
   }
 }
