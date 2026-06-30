@@ -1,73 +1,49 @@
-// js/main.js
-// Ponto de entrada: detecta isMobile/prefersReducedMotion e carrega
-// somente os módulos adequados. Three.js e cursor customizado só em
-// desktop + sem reduced motion (conforme diretrizes do projeto).
-
-import { initCursor } from "./cursor.js";
-import { initAudio, bindSfxHovers } from "./audio.js";
-import {
-  initScrollEngine,
-  initHeaderState,
-  initScrollIndicator,
-  initReveals,
-  initSmokeTransition,
-  initDepoimentosCarrossel,
-  initFooterYear,
-} from "./scroll.js";
-import { initMenuFilter } from "./menu-filter.js";
-import { initReservaForm } from "./reserva-form.js";
+// main.js — Ponto de entrada: orquestra todos os módulos
+import { state } from './env.js';
+import { initLenis } from './lenis-init.js';
+import { initCountdowns } from './countdown.js';
+import { initCursor } from './cursor.js';
+import { initAudio } from './audio.js';
+import { initLazyMedia } from './lazy-load.js';
+import { initAccordion, initScarcityBar, initScrollProgress } from './ui.js';
+import { initScrollAnimations } from './gsap-animations.js';
 
 function boot() {
-  const isMobile = window.innerWidth < 768;
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Controla via CSS qual versão do prato (Three.js vs imagem) é exibida.
-  if (isMobile || prefersReducedMotion) {
-    document.body.classList.add("modo-fallback-3d");
+  // GSAP e ScrollTrigger são carregados via <script defer> no HTML (escopo global)
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
   }
 
-  // -------- Sempre ativos (graceful degradation) --------
-  initFooterYear();
-  initMenuFilter();
-  initReservaForm();
+  initLenis();
+  initCountdowns();
+  initLazyMedia();
+  initAccordion();
+  initScarcityBar();
+  initScrollProgress();
+  initScrollAnimations();
 
-  // -------- Áudio (Howler) --------
-  const audioApi = initAudio();
-  bindSfxHovers();
-  if (audioApi) window.audioApi = audioApi;
-
-  // -------- Scroll engine (Lenis + GSAP ScrollTrigger) --------
-  const engine = initScrollEngine({ isMobile, prefersReducedMotion });
-  if (engine && engine.lenis) window.lenisInstance = engine.lenis;
-
-  initHeaderState();
-  initScrollIndicator();
-  initReveals({ isMobile, prefersReducedMotion });
-  initSmokeTransition({ isMobile, prefersReducedMotion });
-  initDepoimentosCarrossel();
-
-  // -------- Cursor customizado (desktop + motion completo apenas) --------
-  initCursor({ isMobile, prefersReducedMotion });
-
-  // -------- Three.js (desktop + motion completo apenas) --------
-  if (!isMobile && !prefersReducedMotion) {
-    import("./three-scene.js")
-      .then(({ initThreeScene }) => initThreeScene())
-      .catch((err) => {
-        console.warn("Three.js não pôde ser carregado, usando fallback estático.", err);
-        document.body.classList.add("modo-fallback-3d");
-      });
+  if (!state.isMobile) {
+    initCursor();
   }
 
-  // Refresh do ScrollTrigger após fontes/imagens carregarem, evitando
-  // medições incorretas de pin/scrub.
-  window.addEventListener("load", () => {
-    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+  // Áudio só inicializa interações após o primeiro toque do usuário (autoplay policy)
+  initAudio();
+
+  // Reage a mudanças de ambiente (ex: rotação de tela cruzando o breakpoint mobile)
+  window.addEventListener('env:change', () => {
+    ScrollTrigger.refresh();
   });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", boot);
-} else {
-  boot();
-}
+// Espera os scripts defer (GSAP, ScrollTrigger, Lenis, Howler) estarem prontos
+window.addEventListener('DOMContentLoaded', () => {
+  // Pequeno polling para garantir que os scripts defer externos já carregaram
+  const tryBoot = () => {
+    if (window.gsap && window.ScrollTrigger && window.Lenis && window.Howl) {
+      boot();
+    } else {
+      requestAnimationFrame(tryBoot);
+    }
+  };
+  tryBoot();
+});

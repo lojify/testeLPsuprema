@@ -1,93 +1,48 @@
-// js/audio.js
-// Trilha ambiente + efeitos sonoros via Howler.js
-// Áudio só inicia após interação do usuário (autoplay policy).
+// audio.js — Howler.js: trilha de fundo, clique e sucesso
+import { state } from './env.js';
 
-let bgMusic = null;
-let sfx = {};
+let bgMusic, clickSound, successSound;
+let hasInteracted = false;
 let isMuted = true;
-let started = false;
-let lastSfxPlay = {};
 
-const SFX_DEBOUNCE_MS = 350;
+function buildSounds() {
+  bgMusic = new Howl({
+    src: ['assets/audio/bg-loop.mp3'],
+    loop: true,
+    volume: 0.35,
+  });
+  clickSound = new Howl({ src: ['assets/audio/click.mp3'], volume: 0.6 });
+  successSound = new Howl({ src: ['assets/audio/success.mp3'], volume: 0.8 });
+}
 
 export function initAudio() {
-  if (typeof Howl === "undefined") return null;
+  buildSounds();
 
-  bgMusic = new Howl({
-    src: ["https://cdn.pixabay.com/audio/2022/03/15/audio_1e2efb2dc4.mp3"],
-    loop: true,
-    volume: 0.0,
-    html5: true,
-  });
-
-  sfx = {
-    chiado: new Howl({
-      src: ["https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3"],
-      volume: 0.25,
-    }),
-    borbulhar: new Howl({
-      src: ["https://cdn.pixabay.com/audio/2022/03/10/audio_c8e3578620.mp3"],
-      volume: 0.2,
-    }),
-    taças: new Howl({
-      src: ["https://cdn.pixabay.com/audio/2021/08/09/audio_88447e769f.mp3"],
-      volume: 0.25,
-    }),
-  };
-
-  const toggleBtn = document.getElementById("audio-toggle");
-
-  function startOnFirstInteraction() {
-    if (started) return;
-    started = true;
-    bgMusic.play();
-    bgMusic.fade(0, 0.18, 1200);
-    setMuted(false);
-    window.removeEventListener("click", startOnFirstInteraction);
-    window.removeEventListener("scroll", startOnFirstInteraction);
-  }
-  window.addEventListener("click", startOnFirstInteraction, { once: true });
-  window.addEventListener("scroll", startOnFirstInteraction, { once: true });
-
-  function setMuted(mute) {
-    isMuted = mute;
-    if (mute) {
-      bgMusic.fade(bgMusic.volume(), 0, 400);
-    } else {
-      bgMusic.fade(bgMusic.volume(), 0.18, 400);
-    }
-    if (toggleBtn) toggleBtn.setAttribute("aria-pressed", String(!mute));
-  }
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      if (!started) {
-        startOnFirstInteraction();
-        return;
+  const toggle = document.querySelector('[data-audio-toggle]');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      isMuted = !isMuted;
+      toggle.setAttribute('aria-pressed', String(!isMuted));
+      if (!isMuted) {
+        // Primeira interação do usuário: respeita autoplay policy do navegador
+        hasInteracted = true;
+        bgMusic.play();
+      } else {
+        bgMusic.pause();
       }
-      setMuted(!isMuted);
     });
   }
 
-  return { setMuted };
-}
+  document.querySelectorAll('[data-cta]').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (!state.prefersReducedMotion) clickSound.play();
+    });
+  });
 
-export function playSfx(name) {
-  if (!sfx[name] || isMuted) return;
-  const now = Date.now();
-  if (lastSfxPlay[name] && now - lastSfxPlay[name] < SFX_DEBOUNCE_MS) return;
-  lastSfxPlay[name] = now;
-  sfx[name].play();
-}
-
-export function bindSfxHovers() {
-  document.querySelectorAll(".prato-card.is-quente").forEach((card) => {
-    card.addEventListener("mouseenter", () => playSfx("chiado"));
-  });
-  document.querySelectorAll('[data-categoria="bebidas"]').forEach((card) => {
-    card.addEventListener("mouseenter", () => playSfx("borbulhar"));
-  });
-  document.querySelectorAll(".depoimento-card").forEach((card) => {
-    card.addEventListener("mouseenter", () => playSfx("taças"));
-  });
+  const form = document.querySelector('form[data-signup-form]');
+  if (form) {
+    form.addEventListener('submit', () => {
+      if (!state.prefersReducedMotion) successSound.play();
+    });
+  }
 }
