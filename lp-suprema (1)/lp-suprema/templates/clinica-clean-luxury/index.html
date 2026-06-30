@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Âmbar Estética — Espaço de Bem-Estar</title>
+<meta name="description" content="Clínica de estética e bem-estar. Cuidado discreto, ritual e presença. Agende sua avaliação.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Toggle de áudio -->
+<button id="audioToggle" class="audio-toggle" aria-label="Ativar música ambiente" aria-pressed="false">
+  <span class="audio-toggle__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path class="audio-wave" d="M16 9a4 4 0 010 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+  </span>
+</button>
+
+<!-- Cursor customizado: ponto de luz / folha dourada -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="cursor-leaf" id="cursorLeaf" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M4 20c8-1 14-7 15-15-8 1-14 7-15 15z" stroke="currentColor" stroke-width="1.2" fill="currentColor" fill-opacity="0.15"/><path d="M5 19c4-4 8-8 13-13" stroke="currentColor" stroke-width="1"/></svg>
+</div>
+
+<!-- Partículas de brilho (Canvas 2D) -->
+<canvas id="glowCanvas" class="glow-canvas" aria-hidden="true"></canvas>
+
+<!-- Navegação -->
+<header class="nav" data-reveal>
+  <div class="nav__inner">
+    <a href="#hero" class="nav__brand">Âmbar<span>Estética</span></a>
+    <nav class="nav__links">
+      <a href="#sobre">O Espaço</a>
+      <a href="#tratamentos">Tratamentos</a>
+      <a href="#galeria">Ambiente</a>
+      <a href="#equipe">Especialistas</a>
+      <a href="#oferta" class="nav__cta">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section id="hero" class="hero">
+    <div class="hero__mist hero__mist--1" aria-hidden="true"></div>
+    <div class="hero__mist hero__mist--2" aria-hidden="true"></div>
+
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow" data-reveal>Estética & Bem-Estar</p>
+        <h1 class="hero__headline" data-reveal>
+          Cuidado que se sente<br><span class="hero__headline-accent">antes de se ver</span>
+        </h1>
+        <p class="hero__subline" data-reveal>
+          Um espaço pensado para desacelerar. Protocolos personalizados, presença genuína e resultado discreto.
+        </p>
+        <a href="#oferta" class="btn btn--gold" data-reveal data-cursor-leaf>Agendar avaliação</a>
+      </div>
+
+      <div class="hero__image-wrap" data-reveal>
+        <img
+          src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=80&auto=format&fit=crop&fm=webp"
+          srcset="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=450&q=70&auto=format&fit=crop&fm=webp 450w,
+                  https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&q=80&auto=format&fit=crop&fm=webp 900w"
+          sizes="(max-width: 768px) 320px, 480px"
+          alt="Espaço interno da clínica Âmbar Estética"
+          class="hero__image"
+          loading="eager" width="480" height="600"
+        >
+      </div>
+    </div>
+
+    <div class="hero__scroll-cue" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- 2. SOBRE -->
+  <section id="sobre" class="sobre">
+    <div class="container sobre__grid">
+      <div class="sobre__photo-wrap" data-reveal>
+        <img
+          src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=78&auto=format&fit=crop&fm=webp"
+          alt="Sala de tratamento da clínica"
+          class="sobre__photo"
+          loading="lazy" width="440" height="540"
+        >
+      </div>
+      <div class="sobre__copy">
+        <p class="eyebrow" data-reveal>O Espaço</p>
+        <h2 class="section-title" data-reveal>Um ritual, não um procedimento</h2>
+        <p class="section-lead" data-reveal>
+          Cada visita é pensada como uma pausa. Da recepção ao protocolo final, o objetivo é que você saia mais leve do que entrou.
+        </p>
+        <p class="sobre__text" data-reveal>
+          Há oito anos cuidando de peles e corpos com técnica avançada e sensibilidade humana — sem pressa, sem excesso, apenas o necessário.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. TRATAMENTOS -->
+  <section id="tratamentos" class="tratamentos">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Tratamentos</p>
+      <h2 class="section-title" data-reveal>Protocolos sob medida</h2>
+
+      <div class="tratamentos-grid">
+        <article class="glass-card" data-reveal>
+          <div class="glass-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.2"/><path d="M20 12v8l6 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Facial Renovador</h3>
+          <p>Limpeza profunda, esfoliação suave e máscara nutritiva personalizada.</p>
+        </article>
+
+        <article class="glass-card" data-reveal>
+          <div class="glass-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M10 30c4-10 16-10 20 0M14 18a6 6 0 0112 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Massagem Modeladora</h3>
+          <p>Técnica manual para drenagem, relaxamento e contorno corporal.</p>
+        </article>
+
+        <article class="glass-card" data-reveal>
+          <div class="glass-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M20 8c4 6 8 10 8 16a8 8 0 01-16 0c0-6 4-10 8-16z" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <h3>Hidratação Profunda</h3>
+          <p>Reposição de ativos para peles ressecadas, com efeito imediato.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GALERIA -->
+  <section id="galeria" class="galeria">
+    <div class="container">
+      <p class="eyebrow" data-reveal>O Ambiente</p>
+      <h2 class="section-title" data-reveal>Cada detalhe pensado para acalmar</h2>
+
+      <div class="galeria-grid">
+        <div class="galeria-item" data-reveal>
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&q=75&auto=format&fit=crop&fm=webp" alt="Sala de espera da clínica" loading="lazy" width="320" height="380" class="galeria-item__img">
+        </div>
+        <div class="galeria-item" data-reveal>
+          <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=500&q=75&auto=format&fit=crop&fm=webp" alt="Sala de tratamento" loading="lazy" width="320" height="380" class="galeria-item__img">
+        </div>
+        <div class="galeria-item" data-reveal>
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=75&auto=format&fit=crop&fm=webp" alt="Detalhe de produtos naturais" loading="lazy" width="320" height="380" class="galeria-item__img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DEPOIMENTOS -->
+  <section id="depoimentos" class="depoimentos">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Experiências</p>
+      <h2 class="section-title" data-reveal>O que dizem depois da primeira sessão</h2>
+
+      <div class="depoimentos-grid">
+        <figure class="glass-card glass-card--quote" data-reveal>
+          <blockquote>"Saí de lá como se tivesse desacelerado uma semana inteira em uma hora."</blockquote>
+          <figcaption>Camila Reis</figcaption>
+        </figure>
+        <figure class="glass-card glass-card--quote" data-reveal>
+          <blockquote>"O cuidado com cada detalhe do ambiente já é parte do tratamento."</blockquote>
+          <figcaption>Patrícia Lemos</figcaption>
+        </figure>
+        <figure class="glass-card glass-card--quote" data-reveal>
+          <blockquote>"Resultado visível sem nunca parecer artificial. Exatamente o que eu queria."</blockquote>
+          <figcaption>Beatriz Hofmann</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. EQUIPE -->
+  <section id="equipe" class="equipe">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Especialistas</p>
+      <h2 class="section-title" data-reveal>Mãos de confiança</h2>
+
+      <div class="equipe-grid">
+        <article class="especialista-card" data-reveal>
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&q=75&auto=format&fit=crop&fm=webp" alt="Esteticista Larissa Monte" loading="lazy" width="200" height="240" class="especialista-card__photo">
+          <h3>Larissa Monte</h3>
+          <span>Esteticista facial</span>
+        </article>
+        <article class="especialista-card" data-reveal>
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&q=75&auto=format&fit=crop&fm=webp" alt="Terapeuta Ana Beatriz" loading="lazy" width="200" height="240" class="especialista-card__photo">
+          <h3>Ana Beatriz</h3>
+          <span>Terapeuta corporal</span>
+        </article>
+        <article class="especialista-card" data-reveal>
+          <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=300&q=75&auto=format&fit=crop&fm=webp" alt="Especialista Marina Toledo" loading="lazy" width="200" height="240" class="especialista-card__photo">
+          <h3>Marina Toledo</h3>
+          <span>Especialista em hidratação</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. OFERTA / PLANOS -->
+  <section id="oferta" class="oferta">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Agendar</p>
+      <h2 class="section-title" data-reveal>Comece com uma avaliação completa</h2>
+
+      <div class="planos-grid">
+        <article class="glass-card plano-card plano-card--entrada" data-reveal>
+          <h3>Avaliação + Ritual de Boas-Vindas</h3>
+          <p class="plano-card__desc">Sessão de avaliação completa seguida de um protocolo introdutório de relaxamento.</p>
+          <p class="plano-card__price"><span class="plano-card__currency">R$</span>99<span class="plano-card__cents">,90</span></p>
+          <ul class="plano-card__features">
+            <li>Avaliação de pele e corpo (60 min)</li>
+            <li>Ritual de boas-vindas incluso</li>
+            <li>Plano de cuidado personalizado</li>
+          </ul>
+          <a href="#" class="btn btn--gold btn--full" data-cursor-leaf>Agendar agora</a>
+        </article>
+
+        <article class="glass-card plano-card" data-reveal>
+          <h3>Protocolo Avançado</h3>
+          <p class="plano-card__desc">Pacote de sessões combinadas para resultados contínuos e duradouros.</p>
+          <p class="plano-card__price plano-card__price--quote">Solicitar orçamento</p>
+          <ul class="plano-card__features">
+            <li>Pacote de 4 a 8 sessões</li>
+            <li>Acompanhamento de evolução</li>
+            <li>Produtos de manutenção inclusos</li>
+          </ul>
+          <a href="#contato" class="btn btn--outline btn--full">Solicitar orçamento</a>
+        </article>
+
+        <article class="glass-card plano-card" data-reveal>
+          <h3>Assinatura de Cuidado</h3>
+          <p class="plano-card__desc">Plano contínuo mensal com prioridade de agenda e tratamentos rotativos.</p>
+          <p class="plano-card__price plano-card__price--quote">Solicitar orçamento</p>
+          <ul class="plano-card__features">
+            <li>Sessões mensais inclusas</li>
+            <li>Prioridade de horário</li>
+            <li>Desconto em protocolos extras</li>
+          </ul>
+          <a href="#contato" class="btn btn--outline btn--full">Solicitar orçamento</a>
+        </article>
+      </div>
+
+      <div class="oferta__whatsapp-wrap" data-reveal>
+        <a href="#" class="btn-whatsapp" data-cursor-leaf aria-label="Falar pelo WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.1-.2.1-.4 0-.6-.1-.2-.6-1.4-.8-1.9-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.5 3.9 2.7 1.1 2.7.7 3.2.6.5 0 1.6-.6 1.8-1.3.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5.1-1.3A10 10 0 1012 2z"/></svg>
+          Falar com a clínica
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CONTATO -->
+  <section id="contato" class="contato">
+    <div class="container container--narrow">
+      <p class="eyebrow" data-reveal>Próximo passo</p>
+      <h2 class="section-title" data-reveal>Vamos cuidar de você</h2>
+      <p class="section-lead" data-reveal>
+        Preencha o formulário e nossa equipe entra em contato em até um dia útil.
+      </p>
+
+      <form class="form" data-reveal novalidate>
+        <div class="form__field">
+          <input type="text" id="nome" name="nome" required placeholder=" ">
+          <label for="nome">Nome completo</label>
+        </div>
+        <div class="form__field">
+          <input type="email" id="email" name="email" required placeholder=" ">
+          <label for="email">E-mail</label>
+        </div>
+        <div class="form__field">
+          <textarea id="mensagem" name="mensagem" rows="4" placeholder=" "></textarea>
+          <label for="mensagem">Conte o que você procura</label>
+        </div>
+        <button type="submit" class="btn btn--gold" data-cursor-leaf>Enviar mensagem</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="#hero" class="nav__brand">Âmbar<span>Estética</span></a>
+    <nav class="footer__links">
+      <a href="#sobre">O Espaço</a>
+      <a href="#tratamentos">Tratamentos</a>
+      <a href="#galeria">Ambiente</a>
+      <a href="#equipe">Especialistas</a>
+    </nav>
+    <div class="footer__social">
+      <a href="#" aria-label="Instagram">Instagram</a>
+    </div>
+  </div>
+  <div class="container footer__legal">
+    <p>&copy; 2026 Âmbar Estética. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+
+<script type="module" src="js/config.js" defer></script>
+<script type="module" src="js/cursor.js" defer></script>
+<script type="module" src="js/scroll.js" defer></script>
+<script type="module" src="js/animations.js" defer></script>
+<script type="module" src="js/audio.js" defer></script>
+<script type="module" src="js/particles.js" defer></script>
+<script type="module" src="js/main.js" defer></script>
+</body>
+</html>

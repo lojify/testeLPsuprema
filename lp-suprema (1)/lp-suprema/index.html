@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>UMBRAL — Templates HTML de Classe Mundial</title>
+<meta name="description" content="UMBRAL é um estúdio de templates HTML imersivos e cinematográficos. Seis universos de marca, um único padrão de excelência. Veja ao vivo, escolha o seu.">
+<meta name="color-scheme" content="dark">
+
+<!-- ===== PRECONNECT + FONTES CRÍTICAS ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://fonts.gstatic.com/s/fraunces/v31/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk-fXgUNtVcZVzZ5xPpAU.woff2">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+<!-- ===== RUÍDO/GRÃO GLOBAL (decorativo, CSS puro) ===== -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- ===== CURSOR CUSTOMIZADO (desktop apenas) ===== -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__ring"></div>
+</div>
+
+<!-- ===== LOADER ===== -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__portal">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/></svg>
+  </div>
+  <span class="loader__label">UMBRAL</span>
+</div>
+
+<!-- ===== BARRA DE PROGRESSO DE SCROLL ===== -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ===== HEADER FIXO ===== -->
+<header class="site-header" data-animate="fade">
+  <div class="header-inner">
+    <a class="logo" href="#hero">UMBRAL</a>
+    <nav class="header-nav" aria-label="Navegação principal">
+      <a href="#showroom">Showroom</a>
+      <a href="#precificacao">Investimento</a>
+    </nav>
+    <a class="btn btn--ghost" href="https://wa.me/5541999445977?text=Ol%C3%A1!%20Vim%20da%20LP%20da%20UMBRAL%20e%20quero%20falar%20sobre%20um%20template." target="_blank" rel="noopener" data-cta="header">
+      Falar com a UMBRAL
+    </a>
+  </div>
+</header>
+
+<main id="hero">
+
+  <!-- ===================================================== -->
+  <!-- 1. HERO — A PROMESSA                                   -->
+  <!-- ===================================================== -->
+  <section class="hero" data-section="hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-vignette" aria-hidden="true"></div>
+
+    <div class="hero-portal" id="heroPortal" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <circle class="hero-portal__ring hero-portal__ring--outer" cx="100" cy="100" r="92"/>
+        <circle class="hero-portal__ring hero-portal__ring--inner" cx="100" cy="100" r="70"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="eyebrow" data-animate="rise">UMBRAL — ESTÚDIO DE PORTAIS DIGITAIS</p>
+      <h1 class="hero-title" data-animate="rise">
+        Cada negócio merece<br>
+        um <em>portal</em>, não uma <em>página</em>.
+      </h1>
+      <p class="hero-sub" data-animate="rise">
+        Seis universos de marca. Um único padrão de excelência: 60fps, cinematográfico,
+        construído pra converter. Role para atravessar.
+      </p>
+    </div>
+
+    <button class="scroll-cue" id="scrollCue" data-cta="scroll-cue" aria-label="Rolar para o próximo conteúdo">
+      <span>role e atravesse</span>
+      <i class="scroll-cue__line"></i>
+    </button>
+  </section>
+
+  <!-- ===================================================== -->
+  <!-- 2. TRANSIÇÃO — O MERGULHO                              -->
+  <!-- ===================================================== -->
+  <section class="mergulho" data-section="mergulho">
+    <div class="mergulho-portal" id="mergulhoPortal" aria-hidden="true"></div>
+    <p class="mergulho-text" id="mergulhoText">você está prestes a entrar</p>
+  </section>
+
+  <!-- ===================================================== -->
+  <!-- 3. SHOWROOM — INTRO                                    -->
+  <!-- ===================================================== -->
+  <section class="showroom-intro" id="showroom" data-section="showroom-intro">
+    <p class="eyebrow" data-animate="rise">O SHOWROOM</p>
+    <h2 class="section-title" data-animate="rise">Seis universos. Um padrão de excelência.</h2>
+    <p class="showroom-intro__sub" data-animate="rise">
+      Cada seção abaixo carrega o template real, ao vivo, dentro desta página.
+      Não são prints — é o produto funcionando. Role, interaja, sinta a diferença.
+    </p>
+  </section>
+
+  <!-- ===================================================== -->
+  <!-- 4. DEMONSTRAÇÕES VIVAS                                 -->
+  <!-- ===================================================== -->
+
+  <!-- 4.1 Barbearia Thug Life -->
+  <section class="demo-section" id="demo-barbearia-thug-life" data-section="demo" data-template-name="Barbearia Thug Life">
+    <div class="demo-section__intro">
+      <p class="demo-section__tag" data-animate="rise">01 — URBANO / IMERSIVO</p>
+      <h3 data-animate="rise">Barbearia Thug Life</h3>
+      <p data-animate="rise">Asfalto, neon e grafite animado. Cursor em formato de navalha, trilha em
+        hip-hop lo-fi e fotos que "revelam" como pichação ao rolar — feito pra marcas
+        que vendem atitude, não silêncio.</p>
+    </div>
+    <div class="iframe-wrapper" data-iframe-src="./templates/barbearia-thug-life/index.html">
+      <div class="portal-frame">
+        <iframe loading="lazy" title="Demonstração ao vivo — Barbearia Thug Life" tabindex="-1"></iframe>
+        <div class="iframe-loading-placeholder" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <button class="btn-quero-este" data-template-name="Barbearia Thug Life" data-template-slug="barbearia-thug-life" data-cta="quero-este">
+      Quero Esse Modelo
+    </button>
+  </section>
+
+  <!-- 4.2 Clínica Clean Luxury -->
+  <section class="demo-section demo-section--alt" id="demo-clinica-clean-luxury" data-section="demo" data-template-name="Clínica Clean Luxury">
+    <div class="demo-section__intro">
+      <p class="demo-section__tag" data-animate="rise">02 — ELEGANTE / SUAVE</p>
+      <h3 data-animate="rise">Estética &amp; Clínica Clean Luxury</h3>
+      <p data-animate="rise">Glassmorphism, tons pastéis e dourado discreto. Transições lentas,
+        partículas de brilho e uma cadência que parece spa — porque confiança,
+        nesse nicho, se constrói em silêncio.</p>
+    </div>
+    <div class="iframe-wrapper" data-iframe-src="./templates/clinica-clean-luxury/index.html">
+      <div class="portal-frame">
+        <iframe loading="lazy" title="Demonstração ao vivo — Clínica Clean Luxury" tabindex="-1"></iframe>
+        <div class="iframe-loading-placeholder" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <button class="btn-quero-este" data-template-name="Clínica Clean Luxury" data-template-slug="clinica-clean-luxury" data-cta="quero-este">
+      Quero Esse Modelo
+    </button>
+  </section>
+
+  <!-- 4.3 Gerente/Autoridade -->
+  <section class="demo-section" id="demo-gerente-autoridade" data-section="demo" data-template-name="O Gerente / Autoridade">
+    <div class="demo-section__intro">
+      <p class="demo-section__tag" data-animate="rise">03 — CORPORATIVO / DARK</p>
+      <h3 data-animate="rise">O Gerente / Autoridade</h3>
+      <p data-animate="rise">Dark mode sério, parallax sutil e uma revelação de texto sobre a foto
+        central ao passar o mouse. Construído para quem vende confiança antes
+        de vender qualquer coisa.</p>
+    </div>
+    <div class="iframe-wrapper" data-iframe-src="./templates/gerente-autoridade/index.html">
+      <div class="portal-frame">
+        <iframe loading="lazy" title="Demonstração ao vivo — Gerente / Autoridade" tabindex="-1"></iframe>
+        <div class="iframe-loading-placeholder" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <button class="btn-quero-este" data-template-name="O Gerente / Autoridade" data-template-slug="gerente-autoridade" data-cta="quero-este">
+      Quero Esse Modelo
+    </button>
+  </section>
+
+  <!-- 4.4 Método Acelerador -->
+  <section class="demo-section demo-section--alt" id="demo-metodo-acelerador" data-section="demo" data-template-name="Método Acelerador">
+    <div class="demo-section__intro">
+      <p class="demo-section__tag" data-animate="rise">04 — LANÇAMENTO / CONVERSÃO</p>
+      <h3 data-animate="rise">Método Acelerador</h3>
+      <p data-animate="rise">Urgência real: contador regressivo, barra de escassez e botões que
+        pulsam sem serem irritantes. Construído pra uma única coisa: fechar
+        vendas durante uma janela curta de lançamento.</p>
+    </div>
+    <div class="iframe-wrapper" data-iframe-src="./templates/metodo-acelerador/index.html">
+      <div class="portal-frame">
+        <iframe loading="lazy" title="Demonstração ao vivo — Método Acelerador" tabindex="-1"></iframe>
+        <div class="iframe-loading-placeholder" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <button class="btn-quero-este" data-template-name="Método Acelerador" data-template-slug="metodo-acelerador" data-cta="quero-este">
+      Quero Esse Modelo
+    </button>
+  </section>
+
+  <!-- 4.5 Portfólio Criativo -->
+  <section class="demo-section" id="demo-portfolio-criativo" data-section="demo" data-template-name="Portfólio Criativo KAOS//STUDIO">
+    <div class="demo-section__intro">
+      <p class="demo-section__tag" data-animate="rise">05 — ARTÍSTICO / CAÓTICO CONTROLADO</p>
+      <h3 data-animate="rise">Portfólio Criativo — KAOS//STUDIO</h3>
+      <p data-animate="rise">Cursor extremo, glitch tipográfico e trilha horizontal de painéis que
+        distorcem ao rolar. Pra quem vende personalidade forte e não cabe
+        num grid de 12 colunas.</p>
+    </div>
+    <div class="iframe-wrapper" data-iframe-src="./templates/portfolio-criativo/index.html">
+      <div class="portal-frame">
+        <iframe loading="lazy" title="Demonstração ao vivo — Portfólio Criativo KAOS//STUDIO" tabindex="-1"></iframe>
+        <div class="iframe-loading-placeholder" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <button class="btn-quero-este" data-template-name="Portfólio Criativo KAOS//STUDIO" data-template-slug="portfolio-criativo" data-cta="quero-este">
+      Quero Esse Modelo
+    </button>
+  </section>
+
+  <!-- 4.6 Pizzaria Campo dos Sonhos -->
+  <section class="demo-section demo-section--alt" id="demo-pizzaria-campo-dos-sonhos" data-section="demo" data-template-name="Pizzaria Campo dos Sonhos">
+    <div class="demo-section__intro">
+      <p class="demo-section__tag" data-animate="rise">06 — GASTRONOMIA DE ELITE</p>
+      <h3 data-animate="rise">Pizzaria Campo dos Sonhos</h3>
+      <p data-animate="rise">Vídeo de ingrediente em câmera lenta, cardápio com filtro interativo
+        e formulário de reserva embutido. Luxo gastronômico que dá água
+        na boca antes mesmo do primeiro scroll.</p>
+    </div>
+    <div class="iframe-wrapper" data-iframe-src="./templates/pizzaria-campo-dos-sonhos/index.html">
+      <div class="portal-frame">
+        <iframe loading="lazy" title="Demonstração ao vivo — Pizzaria Campo dos Sonhos" tabindex="-1"></iframe>
+        <div class="iframe-loading-placeholder" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <button class="btn-quero-este" data-template-name="Pizzaria Campo dos Sonhos" data-template-slug="pizzaria-campo-dos-sonhos" data-cta="quero-este">
+      Quero Esse Modelo
+    </button>
+  </section>
+
+  <!-- ===================================================== -->
+  <!-- 5. PRECIFICAÇÃO / CTAs FINAIS                          -->
+  <!-- ===================================================== -->
+  <section class="pricing" id="precificacao" data-section="pricing">
+    <p class="eyebrow" data-animate="rise">INVESTIMENTO</p>
+    <h2 class="section-title" data-animate="rise">Quatro níveis. Você escolhe o quanto a UMBRAL constrói por você.</h2>
+
+    <div class="pricing-grid" id="pricingGrid" data-animate="stagger-group">
+      <!-- Cards renderizados via JS a partir de PRICING_TIERS em script.js -->
+    </div>
+
+    <div class="pricing-upsells" id="pricingUpsells" data-animate="fade">
+      <!-- Upsells renderizados via JS -->
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================================================== -->
+<!-- FOOTER                                                 -->
+<!-- ===================================================== -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="logo logo--footer">UMBRAL</span>
+    <p>Templates HTML de classe mundial. Performance extrema, experiência imersiva, confiança inabalável.</p>
+    <a href="https://wa.me/5541999445977?text=Ol%C3%A1!%20Vim%20da%20LP%20da%20UMBRAL%20e%20quero%20falar%20sobre%20um%20template." target="_blank" rel="noopener" data-cta="footer">
+      (41) 99944-5977 — WhatsApp
+    </a>
+  </div>
+</footer>
+
+<!-- ===================================================== -->
+<!-- QUIZ DE ELITE — MODAL                                  -->
+<!-- ===================================================== -->
+<div class="quiz-overlay" id="quizOverlay" aria-hidden="true">
+  <div class="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+    <button class="quiz-modal__close" id="quizClose" aria-label="Fechar quiz">&times;</button>
+
+    <div class="quiz-modal__progress" aria-hidden="true">
+      <i id="quizProgressBar"></i>
+    </div>
+
+    <!-- Etapa: pergunta -->
+    <div class="quiz-step" id="quizStepQuestion">
+      <p class="quiz-step__eyebrow" id="quizTemplateContext"></p>
+      <h3 class="quiz-step__question" id="quizQuestionText"></h3>
+      <div class="quiz-step__options" id="quizOptions"></div>
+    </div>
+
+    <!-- Etapa: resultado -->
+    <div class="quiz-step quiz-step--result" id="quizStepResult" hidden>
+      <p class="quiz-step__eyebrow">SEU RESULTADO</p>
+      <h3 id="quizTitle">Recomendação UMBRAL</h3>
+      <div class="quiz-result" id="quizResultBody"></div>
+      <a class="btn btn--primary" id="quizWhatsappBtn" target="_blank" rel="noopener" data-cta="quiz-result">
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LIBS (CDN, defer, nesta ordem) ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

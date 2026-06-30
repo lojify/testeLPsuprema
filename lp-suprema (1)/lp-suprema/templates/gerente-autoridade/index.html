@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcus Veron — Consultoria Estratégica de Alta Performance</title>
+<meta name="description" content="Consultoria estratégica para líderes e empresas que decidem rápido e executam com precisão. Autoridade, clareza e resultado.">
+
+<!-- Preload de fontes críticas -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Toggle de áudio -->
+<button id="audioToggle" class="audio-toggle" aria-label="Ativar música ambiente" aria-pressed="false">
+  <span class="audio-toggle__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+      <path class="audio-wave" d="M16 9a4 4 0 010 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </span>
+</button>
+
+<!-- Cursor customizado -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- Navegação -->
+<header class="nav" data-reveal>
+  <div class="nav__inner">
+    <a href="#hero" class="nav__brand">MARCUS<span>VERON</span></a>
+    <nav class="nav__links">
+      <a href="#credenciais">Trajetória</a>
+      <a href="#pilares">Atuação</a>
+      <a href="#metodologia">Método</a>
+      <a href="#oferta">Soluções</a>
+      <a href="#contato" class="nav__cta">Falar com a equipe</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section id="hero" class="hero">
+    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
+    <div class="hero__parallax-layer hero__parallax-layer--1" aria-hidden="true"></div>
+    <div class="hero__parallax-layer hero__parallax-layer--2" aria-hidden="true"></div>
+
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow" data-reveal>Consultoria estratégica · Alta liderança</p>
+        <h1 class="hero__headline" data-reveal>
+          Decisões claras.<br>
+          <span class="hero__headline-accent">Resultados inegociáveis.</span>
+        </h1>
+        <p class="hero__subline" data-reveal>
+          Há 17 anos orientando CEOs e diretorias na travessia entre a estratégia no papel e a execução no mundo real.
+        </p>
+        <a href="#oferta" class="btn btn--gold" data-reveal data-magnetic>Conhecer as soluções</a>
+      </div>
+
+      <div class="hero__portrait-wrap" data-reveal>
+        <div class="hero__portrait-frame">
+          <span class="hero__portrait-corner hero__portrait-corner--tl" aria-hidden="true"></span>
+          <span class="hero__portrait-corner hero__portrait-corner--tr" aria-hidden="true"></span>
+          <span class="hero__portrait-corner hero__portrait-corner--bl" aria-hidden="true"></span>
+          <span class="hero__portrait-corner hero__portrait-corner--br" aria-hidden="true"></span>
+
+          <div class="hero__portrait" id="heroPortrait">
+            <div class="hero__portrait-glow" aria-hidden="true"></div>
+            <img
+              src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=900&q=80&auto=format&fit=crop&fm=webp"
+              srcset="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=450&q=70&auto=format&fit=crop&fm=webp 450w,
+                      https://images.unsplash.com/photo-1556157382-97eda2d62296?w=900&q=80&auto=format&fit=crop&fm=webp 900w"
+              sizes="(max-width: 768px) 280px, 420px"
+              alt="Marcus Veron, consultor estratégico, em retrato corporativo"
+              class="hero__portrait-img"
+              loading="eager"
+              width="420" height="520"
+            >
+            <div class="hero__portrait-vignette" aria-hidden="true"></div>
+            <div class="hero__portrait-reveal" aria-hidden="true">
+              <span class="hero__portrait-reveal-word">AUTORIDADE</span>
+              <span class="hero__portrait-reveal-rule"></span>
+              <span class="hero__portrait-reveal-word">CLAREZA</span>
+              <span class="hero__portrait-reveal-rule"></span>
+              <span class="hero__portrait-reveal-word">EXECUÇÃO</span>
+            </div>
+          </div>
+
+          <div class="hero__portrait-badge" aria-hidden="true">
+            <span class="hero__portrait-badge-number">17</span>
+            <span class="hero__portrait-badge-label">anos guiando decisões de alto risco</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- 2. CREDENCIAIS -->
+  <section id="credenciais" class="credenciais">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Trajetória</p>
+      <h2 class="section-title" data-reveal>Números que sustentam cada recomendação</h2>
+      <p class="section-lead" data-reveal>
+        Não é sobre teoria de gestão. É sobre decisões tomadas sob pressão real, em empresas reais, com resultado medido.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat" data-reveal>
+          <span class="stat__number" data-count-to="17">0</span>
+          <span class="stat__suffix">anos</span>
+          <span class="stat__label">de atuação em consultoria executiva</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__number" data-count-to="140">0</span>
+          <span class="stat__suffix">+</span>
+          <span class="stat__label">empresas orientadas em decisões críticas</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__number" data-count-to="89">0</span>
+          <span class="stat__suffix">%</span>
+          <span class="stat__label">dos clientes renovam o contrato anual</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__number" data-count-to="2.4">0</span>
+          <span class="stat__suffix">B</span>
+          <span class="stat__label">em decisões de investimento acompanhadas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SERVIÇOS / PILARES -->
+  <section id="pilares" class="pilares">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Atuação</p>
+      <h2 class="section-title" data-reveal>Três frentes. Um único padrão de exigência.</h2>
+
+      <div class="pilares-grid">
+        <article class="pilar-card" data-reveal>
+          <div class="pilar-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M24 4l16 8v16l-16 8-16-8V12l16-8z" stroke="currentColor" stroke-width="1.5"/><path d="M24 20v16M8 12l16 8 16-8" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Decisão Estratégica</h3>
+          <p>Estruturação de cenários, riscos e trade-offs para decisões de alto impacto — fusões, expansão, reposicionamento de mercado.</p>
+        </article>
+
+        <article class="pilar-card" data-reveal>
+          <div class="pilar-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5"/><path d="M24 14v10l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Governança e Execução</h3>
+          <p>Implantação de rituais de gestão e indicadores que transformam plano em rotina de entrega, com prazos e donos claros.</p>
+        </article>
+
+        <article class="pilar-card" data-reveal>
+          <div class="pilar-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M8 40V24M24 40V8M40 40V18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Liderança de Diretoria</h3>
+          <p>Mentoria individual para C-levels em momentos de transição: novo cargo, crise, sucessão ou crescimento acelerado.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DEPOIMENTOS -->
+  <section id="depoimentos" class="depoimentos">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Prova social</p>
+      <h2 class="section-title" data-reveal>O que dizem depois de decidir junto</h2>
+
+      <div class="depoimentos-grid">
+        <figure class="depoimento-card" data-reveal>
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=160&q=70&auto=format&fit=crop&fm=webp" alt="Retrato de cliente, diretora financeira" loading="lazy" width="64" height="64" class="depoimento-card__avatar">
+          <blockquote>"Trouxe a clareza que faltava entre o board e a operação. Em três meses, decisões que travavam há um ano saíram do papel."</blockquote>
+          <figcaption><strong>Renata Aguiar</strong><span>CFO, Grupo Altiva</span></figcaption>
+        </figure>
+
+        <figure class="depoimento-card" data-reveal>
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&q=70&auto=format&fit=crop&fm=webp" alt="Retrato de cliente, CEO" loading="lazy" width="64" height="64" class="depoimento-card__avatar">
+          <blockquote>"Não é consultoria de slide. É alguém que se senta na mesa e assume o risco da recomendação junto com você."</blockquote>
+          <figcaption><strong>Diego Salum</strong><span>CEO, Construtora Marechal</span></figcaption>
+        </figure>
+
+        <figure class="depoimento-card" data-reveal>
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&q=70&auto=format&fit=crop&fm=webp" alt="Retrato de cliente, sócia-fundadora" loading="lazy" width="64" height="64" class="depoimento-card__avatar">
+          <blockquote>"Mudou a forma como a diretoria discute prioridade. Hoje a gente discorda rápido e decide mais rápido ainda."</blockquote>
+          <figcaption><strong>Helena Bicalho</strong><span>Sócia-fundadora, Vetor Capital</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. METODOLOGIA / TIMELINE -->
+  <section id="metodologia" class="metodologia">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Método</p>
+      <h2 class="section-title" data-reveal>Como a virada de chave acontece</h2>
+
+      <div class="timeline" id="timeline">
+        <svg class="timeline__line" viewBox="0 0 4 1000" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="2" y1="0" x2="2" y2="1000" stroke="currentColor" stroke-width="2" stroke-dasharray="1000" />
+        </svg>
+
+        <div class="timeline__step" data-reveal>
+          <span class="timeline__marker"></span>
+          <h3>Diagnóstico</h3>
+          <p>Imersão de duas semanas para mapear decisões travadas, gargalos de governança e pontos cegos da diretoria.</p>
+        </div>
+        <div class="timeline__step" data-reveal>
+          <span class="timeline__marker"></span>
+          <h3>Arquitetura da decisão</h3>
+          <p>Estruturação de cenários e critérios objetivos para a escolha — sem viés de quem mais fala alto na sala.</p>
+        </div>
+        <div class="timeline__step" data-reveal>
+          <span class="timeline__marker"></span>
+          <h3>Execução acompanhada</h3>
+          <p>Acompanhamento quinzenal com a liderança até o resultado virar rotina, não exceção.</p>
+        </div>
+        <div class="timeline__step" data-reveal>
+          <span class="timeline__marker"></span>
+          <h3>Transferência de método</h3>
+          <p>A diretoria absorve o processo de decisão — o objetivo é que, no fim, você não precise mais de mim.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. OFERTA / PLANOS -->
+  <section id="oferta" class="oferta">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Soluções</p>
+      <h2 class="section-title" data-reveal>Escolha o nível de profundidade que seu momento exige</h2>
+
+      <div class="planos-grid">
+        <article class="plano-card plano-card--entrada" data-reveal>
+          <h3>Diagnóstico Inicial</h3>
+          <p class="plano-card__desc">Sessão de leitura estratégica para identificar a decisão mais urgente da sua operação agora.</p>
+          <p class="plano-card__price"><span class="plano-card__currency">R$</span>99<span class="plano-card__cents">,90</span></p>
+          <ul class="plano-card__features">
+            <li>Sessão de diagnóstico 1:1 (90 min)</li>
+            <li>Relatório de pontos críticos</li>
+            <li>Plano de próximos passos</li>
+          </ul>
+          <a href="#" class="btn btn--gold btn--full" data-magnetic>Começar agora</a>
+        </article>
+
+        <article class="plano-card" data-reveal>
+          <h3>Consultoria Contínua</h3>
+          <p class="plano-card__desc">Acompanhamento mensal de governança e decisões com a diretoria, sob medida para o porte da empresa.</p>
+          <p class="plano-card__price plano-card__price--quote">Solicitar orçamento</p>
+          <ul class="plano-card__features">
+            <li>Reuniões quinzenais com a liderança</li>
+            <li>Acompanhamento de indicadores</li>
+            <li>Suporte direto entre sessões</li>
+          </ul>
+          <a href="#contato" class="btn btn--outline btn--full">Solicitar orçamento</a>
+        </article>
+
+        <article class="plano-card" data-reveal>
+          <h3>Projeto Exclusivo</h3>
+          <p class="plano-card__desc">Imersão completa para momentos de transição: sucessão, fusão, crise ou expansão de alto risco.</p>
+          <p class="plano-card__price plano-card__price--quote">Solicitar orçamento</p>
+          <ul class="plano-card__features">
+            <li>Diagnóstico e plano sob medida</li>
+            <li>Presença acompanhando decisões-chave</li>
+            <li>Relatório executivo para o board</li>
+          </ul>
+          <a href="#contato" class="btn btn--outline btn--full">Solicitar orçamento</a>
+        </article>
+      </div>
+
+      <div class="oferta__whatsapp-wrap" data-reveal>
+        <a href="#" class="btn-whatsapp" data-magnetic aria-label="Falar pelo WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.1-.2.1-.4 0-.6-.1-.2-.6-1.4-.8-1.9-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.5 3.9 2.7 1.1 2.7.7 3.2.6.5 0 1.6-.6 1.8-1.3.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5.1-1.3A10 10 0 1012 2z"/></svg>
+          Falar com a equipe no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CONTATO -->
+  <section id="contato" class="contato">
+    <div class="container container--narrow">
+      <p class="eyebrow eyebrow--light" data-reveal>Próximo passo</p>
+      <h2 class="section-title section-title--light" data-reveal>Vamos conversar sobre a sua decisão</h2>
+      <p class="section-lead section-lead--light" data-reveal>
+        Conte brevemente o contexto. A equipe responde em até um dia útil.
+      </p>
+
+      <form class="form" data-reveal novalidate>
+        <div class="form__field">
+          <input type="text" id="nome" name="nome" required placeholder=" ">
+          <label for="nome">Nome completo</label>
+        </div>
+        <div class="form__field">
+          <input type="email" id="email" name="email" required placeholder=" ">
+          <label for="email">E-mail corporativo</label>
+        </div>
+        <div class="form__field">
+          <textarea id="mensagem" name="mensagem" rows="4" required placeholder=" "></textarea>
+          <label for="mensagem">Contexto da decisão</label>
+        </div>
+        <button type="submit" class="btn btn--gold" data-magnetic>Enviar mensagem</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="#hero" class="nav__brand">MARCUS<span>VERON</span></a>
+    <nav class="footer__links">
+      <a href="#credenciais">Trajetória</a>
+      <a href="#pilares">Atuação</a>
+      <a href="#metodologia">Método</a>
+      <a href="#oferta">Soluções</a>
+    </nav>
+    <div class="footer__social">
+      <a href="#" aria-label="LinkedIn">in</a>
+      <a href="#" aria-label="Instagram">ig</a>
+    </div>
+  </div>
+  <div class="container footer__legal">
+    <p>&copy; 2026 Marcus Veron Consultoria. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- Scripts: Lenis, GSAP, ScrollTrigger, Howler, Three.js via CDN -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+<script type="module" src="js/config.js" defer></script>
+<script type="module" src="js/cursor.js" defer></script>
+<script type="module" src="js/scroll.js" defer></script>
+<script type="module" src="js/animations.js" defer></script>
+<script type="module" src="js/audio.js" defer></script>
+<script type="module" src="js/particles.js" defer></script>
+<script type="module" src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campo dos Sonhos — Gastronomia de Alma</title>
+<meta name="description" content="Campo dos Sonhos: pizzeria e lanchonete de gastronomia de elite. Ingredientes frescos, massas artesanais e uma experiência que é pura lembrança de infância.">
+
+<!-- Preconnect / Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== CURSOR CUSTOMIZADO ===================== -->
+<div id="custom-cursor" class="custom-cursor" aria-hidden="true">
+  <svg class="cursor-icon cursor-faca" viewBox="0 0 48 48" fill="none">
+    <path d="M6 38 L30 14 C33 11 38 11 41 14 C44 17 44 22 41 25 L17 49" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 16 L36 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="cursor-icon cursor-folha" viewBox="0 0 48 48" fill="none">
+    <path d="M10 38 C10 18 22 8 40 8 C40 26 30 38 10 38 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M12 36 C20 28 28 20 38 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <span class="cursor-luz"></span>
+</div>
+
+<!-- ===================== HEADER / NAV ===================== -->
+<header class="site-header" id="site-header">
+  <div class="header-inner container">
+    <a href="#topo" class="brand" data-cursor="luz">Campo dos Sonhos</a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="#historia" data-cursor="folha">História</a>
+      <a href="#cardapio" data-cursor="folha">Cardápio</a>
+      <a href="#depoimentos" data-cursor="folha">Depoimentos</a>
+      <a href="#reservas" data-cursor="folha">Reservas</a>
+      <a href="#contato" data-cursor="folha">Contato</a>
+    </nav>
+    <button id="audio-toggle" class="audio-toggle" data-cursor="luz" aria-pressed="false" aria-label="Ativar som ambiente">
+      <span class="audio-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 9v6h4l5 5V4L8 9H4z"/>
+          <path class="wave wave-1" d="M16.5 8.5a5 5 0 0 1 0 7"/>
+          <path class="wave wave-2" d="M19 6a8.5 8.5 0 0 1 0 12"/>
+        </svg>
+      </span>
+      <span class="audio-label">som</span>
+    </button>
+    <a href="#reservas" class="btn btn-ghost-nav" data-cursor="luz">Reserve sua Mesa</a>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- ===================== 1. HERO CINEMATOGRÁFICO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-media">
+      <video class="hero-video" autoplay muted loop playsinline
+        poster="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=1600&auto=format&fit=crop">
+        <source src="https://cdn.coverr.co/videos/coverr-melting-cheese-on-pizza-2632/1080p.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero-content container">
+      <p class="hero-eyebrow" data-reveal>Pizzeria & Cozinha Artesanal</p>
+      <h1 class="hero-title" data-reveal>
+        <span class="hero-title-line">Campo</span>
+        <span class="hero-title-line hero-title-em">dos Sonhos</span>
+      </h1>
+      <p class="hero-claim" data-reveal>Onde cada prato é uma lembrança de infância, refeita com alma.</p>
+      <div class="hero-cta-wrap" data-reveal>
+        <a href="#reservas" class="btn btn-primary btn-glow" data-cursor="luz">
+          <span>Reserve sua Mesa</span>
+        </a>
+      </div>
+    </div>
+
+    <button class="scroll-indicator" id="scroll-indicator" aria-label="Rolar para baixo" data-cursor="luz">
+      <span class="scroll-indicator-line"></span>
+      <span class="scroll-indicator-text">role</span>
+    </button>
+  </section>
+
+  <!-- ===================== 2. TRANSIÇÃO VAPOR/FUMAÇA ===================== -->
+  <section class="smoke-transition" id="smoke-transition" aria-hidden="true">
+    <canvas id="smoke-canvas"></canvas>
+    <div class="smoke-fallback-img" style="background-image:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1400&auto=format&fit=crop')"></div>
+  </section>
+
+  <!-- ===================== 3. NOSSA HISTÓRIA ===================== -->
+  <section class="historia" id="historia">
+    <div class="container historia-grid">
+      <div class="historia-text">
+        <p class="section-eyebrow">Desde 1987</p>
+        <h2 class="section-title">Uma cozinha que carrega memória</h2>
+        <p class="historia-paragraph">
+          Tudo começou no quintal de Dona Lurdes, entre o cheiro de manjericão fresco e a massa
+          descansando sob um pano de linho. Décadas depois, o Campo dos Sonhos nasceu para guardar
+          esse ritual — cada pizza sovada à mão, cada molho cozido em fogo baixo por horas, cada
+          ingrediente escolhido como se fosse para a própria família.
+        </p>
+        <p class="historia-paragraph">
+          Hoje seguimos o mesmo princípio: nada de atalhos, tudo de afeto. Um lugar para sentar,
+          respirar fundo e sentir que está, de alguma forma, em casa.
+        </p>
+      </div>
+      <div class="historia-media">
+        <div class="reveal-img reveal-img-1">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop" alt="Massa de pizza artesanal sendo preparada à mão" loading="lazy">
+        </div>
+        <div class="reveal-img reveal-img-2">
+          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop" alt="Forno a lenha aceso na cozinha do restaurante" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4. PRATO EM DESTAQUE (3D) ===================== -->
+  <section class="prato-destaque" id="prato-destaque">
+    <div class="container prato-grid">
+      <div class="prato-canvas-wrap">
+        <canvas id="three-canvas" aria-hidden="true"></canvas>
+        <img
+          id="prato-fallback"
+          class="prato-fallback-img"
+          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop"
+          alt="Pizza assinatura Campo dos Sonhos, com manjericão fresco e queijo derretido"
+          loading="lazy">
+      </div>
+      <div class="prato-text">
+        <p class="section-eyebrow">Assinatura da Casa</p>
+        <h2 class="section-title">Pizza Campo dos Sonhos</h2>
+        <p class="prato-paragraph">
+          Massa de fermentação natural por 48 horas, molho de tomates san marzano, fior di latte,
+          manjericão colhido na horta e um fio de azeite trufado. Gire, observe, sinta o aroma —
+          antes mesmo do primeiro pedaço.
+        </p>
+        <ul class="prato-ingredientes">
+          <li>Massa de fermentação natural 48h</li>
+          <li>Fior di latte importado</li>
+          <li>Manjericão fresco da horta própria</li>
+          <li>Azeite trufado artesanal</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. NOSSO CARDÁPIO ===================== -->
+  <section class="cardapio" id="cardapio">
+    <div class="container">
+      <p class="section-eyebrow center">Nosso Cardápio</p>
+      <h2 class="section-title center">Feito com o que há de mais fresco</h2>
+
+      <div class="cardapio-filtros" role="tablist" aria-label="Filtrar cardápio por categoria">
+        <button class="filtro-btn is-active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
+        <button class="filtro-btn" data-filtro="entradas" role="tab" aria-selected="false">Entradas</button>
+        <button class="filtro-btn" data-filtro="massas" role="tab" aria-selected="false">Massas</button>
+        <button class="filtro-btn" data-filtro="pizzas" role="tab" aria-selected="false">Pizzas</button>
+        <button class="filtro-btn" data-filtro="sobremesas" role="tab" aria-selected="false">Sobremesas</button>
+        <button class="filtro-btn" data-filtro="bebidas" role="tab" aria-selected="false">Bebidas</button>
+      </div>
+
+      <div class="cardapio-grid" id="cardapio-grid">
+
+        <article class="prato-card is-quente" data-categoria="entradas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?q=80&w=700&auto=format&fit=crop" alt="Bruschetta de tomate e manjericão" loading="lazy">
+            <span class="vapor" aria-hidden="true"></span>
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Bruschetta Toscana</h3>
+              <span class="prato-preco">R$ 34</span>
+            </div>
+            <p>Pão rústico, tomate confit, manjericão fresco, azeite extra virgem.</p>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="entradas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?q=80&w=700&auto=format&fit=crop" alt="Tábua de queijos e embutidos" loading="lazy">
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Tábua da Casa</h3>
+              <span class="prato-preco">R$ 68</span>
+            </div>
+            <p>Seleção de queijos artesanais, embutidos curados e geleia de figo.</p>
+          </div>
+        </article>
+
+        <article class="prato-card is-quente" data-categoria="massas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=700&auto=format&fit=crop" alt="Talharim ao molho de manteiga e sálvia" loading="lazy">
+            <span class="vapor" aria-hidden="true"></span>
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Talharim ao Burro e Sálvia</h3>
+              <span class="prato-preco">R$ 56</span>
+            </div>
+            <p>Massa fresca artesanal, manteiga de leite, sálvia e parmesão envelhecido.</p>
+          </div>
+        </article>
+
+        <article class="prato-card is-quente" data-categoria="massas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=700&auto=format&fit=crop" alt="Risoto de cogumelos selvagens" loading="lazy">
+            <span class="vapor" aria-hidden="true"></span>
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Risoto de Cogumelos</h3>
+              <span class="prato-preco">R$ 62</span>
+            </div>
+            <p>Arbóreo cremoso, cogumelos selvagens salteados e trufa negra.</p>
+          </div>
+        </article>
+
+        <article class="prato-card is-quente" data-categoria="pizzas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=700&auto=format&fit=crop" alt="Pizza Campo dos Sonhos com manjericão" loading="lazy">
+            <span class="vapor" aria-hidden="true"></span>
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Campo dos Sonhos</h3>
+              <span class="prato-preco">R$ 74</span>
+            </div>
+            <p>Fior di latte, san marzano, manjericão fresco, azeite trufado.</p>
+          </div>
+        </article>
+
+        <article class="prato-card is-quente" data-categoria="pizzas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=700&auto=format&fit=crop" alt="Pizza de presunto cru e rúcula" loading="lazy">
+            <span class="vapor" aria-hidden="true"></span>
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Crudo & Rúcula</h3>
+              <span class="prato-preco">R$ 79</span>
+            </div>
+            <p>Presunto cru 18 meses, rúcula selvagem, lascas de parmesão.</p>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="sobremesas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=700&auto=format&fit=crop" alt="Tiramisù artesanal" loading="lazy">
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Tiramisù della Nonna</h3>
+              <span class="prato-preco">R$ 38</span>
+            </div>
+            <p>Mascarpone, café espresso, cacau amargo e biscoito champanhe.</p>
+          </div>
+        </article>
+
+        <article class="prato-card" data-categoria="bebidas">
+          <div class="prato-card-img">
+            <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=700&auto=format&fit=crop" alt="Taça de vinho tinto" loading="lazy">
+          </div>
+          <div class="prato-card-body">
+            <div class="prato-card-head">
+              <h3>Vinho Tinto Reserva</h3>
+              <span class="prato-preco">R$ 48</span>
+            </div>
+            <p>Seleção da casa, taça de blend encorpado envelhecido em carvalho.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6. GALERIA DE INGREDIENTES ===================== -->
+  <section class="galeria" id="galeria">
+    <p class="section-eyebrow center">Ingredientes</p>
+    <h2 class="section-title center">Frescor que se vê — e se ouve</h2>
+    <div class="galeria-grid">
+      <div class="galeria-item">
+        <video class="galeria-video" muted loop playsinline preload="none"
+          poster="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=900&auto=format&fit=crop"
+          loading="lazy">
+          <source src="https://cdn.coverr.co/videos/coverr-melting-cheese-on-pizza-2632/720p.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="galeria-item">
+        <video class="galeria-video" muted loop playsinline preload="none"
+          poster="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=900&auto=format&fit=crop"
+          loading="lazy">
+          <source src="https://cdn.coverr.co/videos/coverr-chopping-fresh-herbs-1080p/720p.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="galeria-item">
+        <video class="galeria-video" muted loop playsinline preload="none"
+          poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop"
+          loading="lazy">
+          <source src="https://cdn.coverr.co/videos/coverr-kneading-dough-3120/720p.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. DEPOIMENTOS ===================== -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="container">
+      <p class="section-eyebrow center">Depoimentos</p>
+      <h2 class="section-title center">Memórias à mesa</h2>
+
+      <div class="depoimentos-carrossel" id="depoimentos-carrossel">
+        <div class="depoimento-track" id="depoimento-track">
+
+          <article class="depoimento-card glass">
+            <div class="depoimento-estrelas" aria-hidden="true">★★★★★</div>
+            <p class="depoimento-texto">"A massa lembra a da minha avó. Não esperava chorar de saudade comendo pizza, mas aconteceu."</p>
+            <div class="depoimento-autor">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=160&auto=format&fit=crop" alt="" loading="lazy">
+              <div>
+                <strong>Marina Costa</strong>
+                <span>Cliente desde 2019</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="depoimento-card glass">
+            <div class="depoimento-estrelas" aria-hidden="true">★★★★★</div>
+            <p class="depoimento-texto">"Ambiente impecável, serviço atencioso e cada prato parece ter sido pensado especialmente para você."</p>
+            <div class="depoimento-autor">
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=160&auto=format&fit=crop" alt="" loading="lazy">
+              <div>
+                <strong>Rafael Andrade</strong>
+                <span>Cliente desde 2021</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="depoimento-card glass">
+            <div class="depoimento-estrelas" aria-hidden="true">★★★★★</div>
+            <p class="depoimento-texto">"O risoto de cogumelos é uma experiência. Voltamos todo mês com a família inteira."</p>
+            <div class="depoimento-autor">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=160&auto=format&fit=crop" alt="" loading="lazy">
+              <div>
+                <strong>Beatriz Lima</strong>
+                <span>Cliente desde 2018</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="depoimento-card glass">
+            <div class="depoimento-estrelas" aria-hidden="true">★★★★★</div>
+            <p class="depoimento-texto">"Reservei para um jantar especial e fui surpreendido em cada detalhe. Lugar raro."</p>
+            <div class="depoimento-autor">
+              <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=160&auto=format&fit=crop" alt="" loading="lazy">
+              <div>
+                <strong>Thiago Mendes</strong>
+                <span>Cliente desde 2022</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+        <div class="depoimentos-controles">
+          <button id="depo-prev" class="depo-nav" aria-label="Depoimento anterior" data-cursor="luz">‹</button>
+          <button id="depo-next" class="depo-nav" aria-label="Próximo depoimento" data-cursor="luz">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 8. RESERVAS ===================== -->
+  <section class="reservas" id="reservas">
+    <div class="container reservas-grid">
+      <div class="reservas-text">
+        <p class="section-eyebrow">Reservas</p>
+        <h2 class="section-title">Garanta sua mesa</h2>
+        <p class="reservas-paragraph">
+          Receba-nos para um jantar inesquecível. Preencha os campos abaixo e confirmaremos
+          sua reserva com carinho — em poucas horas.
+        </p>
+      </div>
+
+      <form class="reserva-form" id="reserva-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" required autocomplete="name">
+            <span class="form-error" data-error-for="nome"></span>
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" required autocomplete="tel">
+            <span class="form-error" data-error-for="telefone"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" required>
+            <span class="form-error" data-error-for="data"></span>
+          </div>
+          <div class="form-group">
+            <label for="horario">Horário</label>
+            <input type="time" id="horario" name="horario" required>
+            <span class="form-error" data-error-for="horario"></span>
+          </div>
+          <div class="form-group">
+            <label for="pessoas">Pessoas</label>
+            <input type="number" id="pessoas" name="pessoas" min="1" max="20" value="2" required>
+            <span class="form-error" data-error-for="pessoas"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="observacoes">Observações <span class="opcional">(opcional)</span></label>
+          <textarea id="observacoes" name="observacoes" rows="3" placeholder="Alguma preferência, alergia ou ocasião especial?"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-glow" data-cursor="luz">
+          <span>Confirmar Reserva</span>
+        </button>
+
+        <div class="form-confirmacao" id="form-confirmacao" role="status" aria-live="polite">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+          <span>Reserva recebida! Em breve entraremos em contato para confirmar.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== 9. LOCALIZAÇÃO E CONTATO ===================== -->
+  <section class="contato" id="contato">
+    <div class="container contato-grid">
+      <div class="contato-mapa" role="img" aria-label="Mapa estilizado da localização do Campo dos Sonhos">
+        <div class="mapa-placeholder">
+          <svg viewBox="0 0 400 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1F3326"/>
+            <path d="M0 60 H400 M0 150 H400 M0 230 H400" stroke="#C9A227" stroke-opacity="0.15" stroke-width="1"/>
+            <path d="M60 0 V300 M180 0 V300 M300 0 V300" stroke="#C9A227" stroke-opacity="0.15" stroke-width="1"/>
+            <circle cx="200" cy="150" r="10" fill="#C9A227"/>
+            <circle cx="200" cy="150" r="22" fill="none" stroke="#C9A227" stroke-width="1.5" opacity="0.6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="contato-info">
+        <p class="section-eyebrow">Visite-nos</p>
+        <h2 class="section-title">Localização & Horários</h2>
+        <address class="contato-endereco">
+          Rua das Oliveiras, 482 — Vila Madalena<br>
+          São Paulo, SP — 05435-000
+        </address>
+        <ul class="contato-horarios">
+          <li><span>Terça a Sexta</span><span>18h – 23h</span></li>
+          <li><span>Sábado</span><span>12h – 23h30</span></li>
+          <li><span>Domingo</span><span>12h – 17h</span></li>
+          <li><span>Segunda</span><span>Fechado</span></li>
+        </ul>
+        <div class="contato-links">
+          <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" class="btn btn-outline" data-cursor="luz">WhatsApp</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="link-social" data-cursor="luz">Instagram</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="link-social" data-cursor="luz">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="brand footer-logo">Campo dos Sonhos</span>
+      <p>Gastronomia de elite, feita com alma e ingrediente fresco.</p>
+    </div>
+    <nav class="footer-links" aria-label="Links rápidos">
+      <a href="#historia">História</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#reservas">Reservas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="footer-selo">
+      <span class="selo">Selo de Qualidade Premium</span>
+      <p>&copy; <span id="ano-atual"></span> Campo dos Sonhos. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== CDN LIBS ===================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+<!-- ===================== APP MODULES ===================== -->
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

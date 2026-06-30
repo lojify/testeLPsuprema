@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>KAOS//STUDIO — Portfólio Criativo Experimental</title>
+<meta name="description" content="KAOS//STUDIO — direção de arte, identidade visual e experimentação digital. Caos controlado, sem regras de manual de marca.">
+<meta name="color-scheme" content="dark">
+
+<!-- ===== PRECONNECT + FONTES CRÍTICAS (subset + preload) ===== -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/fontsource/fonts/unbounded@latest/latin-900-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-400-normal.woff2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/unbounded@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/space-grotesk@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/jetbrains-mono@latest/index.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+<!-- ===== TEXTURA DE GRÃO GLOBAL (decorativa) ===== -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- ===== CURSOR CUSTOMIZADO (desativado em mobile / reduced motion via JS) ===== -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__ring"></div>
+  <span class="cursor__label" id="cursorLabel"></span>
+</div>
+<canvas class="cursor-trail" id="cursorTrail" aria-hidden="true"></canvas>
+
+<!-- ===== LOADER ===== -->
+<div class="loader" id="loader" aria-hidden="true">
+  <span class="loader__glitch" data-text="KAOS//STUDIO">KAOS//STUDIO</span>
+  <div class="loader__bar"><i id="loaderBar"></i></div>
+</div>
+
+<!-- ===== NAV FIXA ===== -->
+<header class="hud">
+  <a href="#intro" class="hud__logo" data-cursor="ring" data-cursor-label="TOPO">KAOS<span>//</span>STUDIO</a>
+
+  <nav class="hud__nav" aria-label="Navegação por seções">
+    <button class="hud__navItem" data-target="work" data-cursor="ring">TRABALHOS</button>
+    <button class="hud__navItem" data-target="about" data-cursor="ring">ESTÚDIO</button>
+    <button class="hud__navItem" data-target="contact" data-cursor="ring">CONTATO</button>
+  </nav>
+
+  <div class="hud__controls">
+    <button class="hud__audio" id="audioToggle" type="button" aria-pressed="false" data-cursor="ring" data-cursor-label="SOM">
+      <span class="hud__audioBars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="hud__audioText">ÁUDIO OFF</span>
+    </button>
+  </div>
+
+  <!-- barra de progresso do scroll horizontal -->
+  <div class="hud__progress" aria-hidden="true"><i id="scrollProgress"></i></div>
+</header>
+
+<!-- ===== TRILHA HORIZONTAL PRINCIPAL ===== -->
+<main id="track-wrapper" class="track-wrapper">
+  <div class="track" id="track">
+
+    <!-- ---------- 01 · INTRO ---------- -->
+    <section class="panel panel--intro" id="intro" aria-label="Abertura">
+      <p class="panel__eyebrow mono">CAOS CONTROLADO — EST. 2019</p>
+      <h1 class="glitch-title" data-text="ARTE QUE">
+        ARTE QUE
+        <em class="glitch-title__line glitch-title__line--alt" data-text="DESOBEDECE">DESOBEDECE</em>
+      </h1>
+      <p class="panel__desc">
+        Direção de arte, identidade visual e experimentação digital.
+        Rolamos na horizontal porque a régua corporativa fica vertical demais.
+      </p>
+      <button class="scroll-cue" id="scrollCue" type="button" data-cursor="ring" data-cursor-label="ROLE →">
+        <span class="mono">ROLE</span>
+        <span class="scroll-cue__arrow" aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <!-- ---------- 02 · WORK ---------- -->
+    <section class="panel panel--work" id="work" aria-label="Trabalhos selecionados">
+      <h2 class="panel__title mono">02 / TRABALHOS</h2>
+      <div class="work-grid">
+
+        <article class="work-card" data-cursor="pixel" data-cursor-label="VER">
+          <div class="work-card__media">
+            <img class="distort-img" loading="lazy" decoding="async"
+                 src="https://picsum.photos/seed/kaos01/900/1100" alt="Identidade visual do projeto Ruído Visível, composição em camadas vermelhas e pretas">
+          </div>
+          <h3 class="work-card__title">Ruído Visível</h3>
+          <p class="mono work-card__tag">Identidade · 2025</p>
+        </article>
+
+        <article class="work-card" data-cursor="pixel" data-cursor-label="VER">
+          <div class="work-card__media">
+            <img class="distort-img" loading="lazy" decoding="async"
+                 src="https://picsum.photos/seed/kaos02/900/1100" alt="Capa editorial experimental para fanzine de tipografia distorcida">
+          </div>
+          <h3 class="work-card__title">Fanzine 808</h3>
+          <p class="mono work-card__tag">Editorial · 2024</p>
+        </article>
+
+        <article class="work-card" data-cursor="pixel" data-cursor-label="VER">
+          <div class="work-card__media">
+            <img class="distort-img" loading="lazy" decoding="async"
+                 src="https://picsum.photos/seed/kaos03/900/1100" alt="Instalação interativa com projeção de glitch em galeria">
+          </div>
+          <h3 class="work-card__title">Sala de Estática</h3>
+          <p class="mono work-card__tag">Instalação · 2024</p>
+        </article>
+
+        <article class="work-card" data-cursor="pixel" data-cursor-label="VER">
+          <div class="work-card__media">
+            <img class="distort-img" loading="lazy" decoding="async"
+                 src="https://picsum.photos/seed/kaos04/900/1100" alt="Capa de álbum experimental com tipografia pixelada">
+          </div>
+          <h3 class="work-card__title">Capa / Lado B</h3>
+          <p class="mono work-card__tag">Música · 2023</p>
+        </article>
+
+        <article class="work-card" data-cursor="pixel" data-cursor-label="VER">
+          <div class="work-card__media">
+            <img class="distort-img" loading="lazy" decoding="async"
+                 src="https://picsum.photos/seed/kaos05/900/1100" alt="Vitrine de loja conceito com neon e textura de concreto">
+          </div>
+          <h3 class="work-card__title">Vitrine Concreto</h3>
+          <p class="mono work-card__tag">Branding · 2023</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ---------- 03 · ABOUT ---------- -->
+    <section class="panel panel--about" id="about" aria-label="Sobre o estúdio">
+      <h2 class="panel__title mono">03 / ESTÚDIO</h2>
+      <p class="about-text">
+        Somos um coletivo de três pessoas que trata cada brief como um pretexto
+        para quebrar uma regra. Trabalhamos com marcas que têm coragem de
+        parecer diferentes — e paciência para aturar nossas reuniões caóticas.
+      </p>
+      <ul class="about-list mono">
+        <li><span>Direção de arte</span><span>05 anos</span></li>
+        <li><span>Identidade de marca</span><span>40+ projetos</span></li>
+        <li><span>Motion & código criativo</span><span>desde 2021</span></li>
+      </ul>
+    </section>
+
+    <!-- ---------- 04 · MARQUEE / PROCESSO ---------- -->
+    <section class="panel panel--marquee" aria-hidden="true">
+      <div class="marquee">
+        <div class="marquee__track">
+          <span>CAOS CONTROLADO&nbsp;</span><span>—</span><span>QUEBRE A GRADE&nbsp;</span><span>—</span>
+          <span>ERRO É ESTILO&nbsp;</span><span>—</span><span>CAOS CONTROLADO&nbsp;</span><span>—</span>
+          <span>QUEBRE A GRADE&nbsp;</span><span>—</span><span>ERRO É ESTILO&nbsp;</span><span>—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 05 · CONTACT ---------- -->
+    <section class="panel panel--contact" id="contact" aria-label="Contato">
+      <h2 class="panel__title mono">05 / CONTATO</h2>
+      <h3 class="glitch-title glitch-title--small" data-text="VAMOS QUEBRAR ALGO?">VAMOS QUEBRAR ALGO?</h3>
+      <a class="contact-link" href="mailto:oi@kaosstudio.example" data-cursor="ring" data-cursor-label="ENVIAR">
+        oi@kaosstudio.example
+      </a>
+      <div class="contact-social mono">
+        <a href="#" data-cursor="ring">INSTAGRAM</a>
+        <a href="#" data-cursor="ring">BEHANCE</a>
+        <a href="#" data-cursor="ring">SÃO PAULO, BR</a>
+      </div>
+      <p class="contact-footer mono">© 2025 KAOS//STUDIO — TODOS OS DIREITOS DESORDENADOS.</p>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== SCRIPTS (defer / async para não bloquear o parse) ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

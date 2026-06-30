@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Acelerador — A Virada Começa Agora</title>
+<meta name="description" content="Lançamento exclusivo. Vagas limitadas. Comece sua virada de chave hoje.">
+
+<!-- Preload de fontes críticas -->
+<link rel="preload" href="https://fonts.gstatic.com/s/archivoblack/v18/HTxqL289NzCGg4MzN6KJ7eW6CYyF_iWImNHmHIzKpQ.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Cursor customizado (desktop only) -->
+<div class="custom-cursor" aria-hidden="true">
+  <svg class="cursor-icon cursor-icon--arrow" viewBox="0 0 24 24" fill="none"><path d="M5 3L19 12L12 13L9 20L5 3Z" fill="currentColor"/></svg>
+  <svg class="cursor-icon cursor-icon--rocket" viewBox="0 0 24 24" fill="none"><path d="M12 2C9 5 7 9 7 13c0 1.5.5 3 1.5 4L12 14l3.5 3c1-1 1.5-2.5 1.5-4 0-4-2-8-5-11Z" fill="currentColor"/><circle cx="12" cy="10" r="1.5" fill="#000"/></svg>
+</div>
+
+<!-- Barra de progresso de scroll -->
+<div class="scroll-progress" data-scroll-progress></div>
+
+<!-- 1. HEADER FIXO -->
+<header class="site-header" data-animate="fade">
+  <div class="header-inner">
+    <a class="logo" href="#hero">MÉTODO<span>ACELERADOR</span></a>
+    <div class="header-countdown" data-countdown data-deadline="2026-07-07T23:59:59-03:00" aria-label="Tempo restante da oferta">
+      <span data-unit="days">00</span><small>d</small>
+      <span data-unit="hours">00</span><small>h</small>
+      <span data-unit="minutes">00</span><small>m</small>
+      <span data-unit="seconds">00</span><small>s</small>
+    </div>
+    <a href="#oferta" class="btn btn--ghost" data-cta="header">Garantir vaga</a>
+  </div>
+</header>
+
+<main id="hero">
+
+  <!-- 2. HERO -->
+  <section class="hero" data-section="hero">
+    <video class="hero-bg" autoplay muted loop playsinline poster="assets/hero-poster.webp" data-lazy-video>
+      <source data-src="assets/hero-bg.webm" type="video/webm">
+      <source data-src="assets/hero-bg.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="eyebrow" data-animate="rise">Turma de Julho — últimas vagas</p>
+      <h1 class="hero-title" data-animate="explode">
+        SUA VIRADA<br><span class="hero-title__accent">COMEÇA</span> AGORA
+      </h1>
+      <p class="hero-sub" data-animate="rise">
+        O método que já tirou mais de 4.200 pessoas do zero e colocou seus primeiros resultados reais em até 21 dias.
+      </p>
+
+      <div class="hero-countdown" data-countdown data-deadline="2026-07-07T23:59:59-03:00" data-animate="explode">
+        <div class="countdown-box pulse"><span data-unit="days">00</span><small>Dias</small></div>
+        <div class="countdown-box pulse"><span data-unit="hours">00</span><small>Horas</small></div>
+        <div class="countdown-box pulse"><span data-unit="minutes">00</span><small>Min</small></div>
+        <div class="countdown-box pulse"><span data-unit="seconds">00</span><small>Seg</small></div>
+      </div>
+
+      <a href="#oferta" class="btn btn--primary btn--jump" data-cta="hero">
+        QUERO GARANTIR MINHA VAGA
+      </a>
+      <p class="hero-microcopy">Acesso imediato • Garantia de 7 dias</p>
+    </div>
+  </section>
+
+  <!-- 3. DOR / PROBLEMA -->
+  <section class="pain" data-section="pain">
+    <h2 class="section-title" data-animate="rise">Você reconhece esse ciclo?</h2>
+    <ul class="pain-list">
+      <li class="pain-item" data-animate="stagger">
+        <svg class="pain-icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2Z" fill="currentColor"/></svg>
+        <p>Você já tentou 3, 4, 5 métodos diferentes e nenhum trouxe resultado real.</p>
+      </li>
+      <li class="pain-item" data-animate="stagger">
+        <svg class="pain-icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2Z" fill="currentColor"/></svg>
+        <p>Cada novo curso que você compra vira mais uma aba aberta e esquecida.</p>
+      </li>
+      <li class="pain-item" data-animate="stagger">
+        <svg class="pain-icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2Z" fill="currentColor"/></svg>
+        <p>Você sabe que o problema não é esforço — é não ter um caminho claro.</p>
+      </li>
+      <li class="pain-item" data-animate="stagger">
+        <svg class="pain-icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2Z" fill="currentColor"/></svg>
+        <p>O relógio continua correndo enquanto outras pessoas saem na frente.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 4. SOLUÇÃO / OFERTA -->
+  <section class="solution" data-section="solution">
+    <div class="solution-grid">
+      <div class="solution-copy">
+        <h2 class="section-title" data-animate="rise">O Método Acelerador resolve isso em 4 etapas</h2>
+        <ul class="benefit-list" data-animate="stagger-group">
+          <li><strong>Diagnóstico Rápido</strong> — descubra exatamente onde você está perdendo tempo.</li>
+          <li><strong>Plano de 21 Dias</strong> — passo a passo sem enrolação, sem teoria solta.</li>
+          <li><strong>Execução Guiada</strong> — check-ins e templates prontos para aplicar hoje.</li>
+          <li><strong>Resultado Mensurável</strong> — métricas claras para você ver a virada acontecer.</li>
+        </ul>
+        <a href="#oferta" class="btn btn--primary btn--jump" data-cta="solution">VER A OFERTA COMPLETA</a>
+      </div>
+      <div class="solution-visual" data-animate="explode">
+        <img src="assets/mockup-produto.webp" alt="Mockup do Método Acelerador em um laptop e celular" loading="lazy" width="640" height="480">
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PROVA SOCIAL -->
+  <section class="social-proof" data-section="proof">
+    <h2 class="section-title" data-animate="rise">Resultados de gente real</h2>
+
+    <div class="stats-row">
+      <div class="stat" data-animate="rise">
+        <span class="stat-number" data-count-to="4200">0</span>
+        <small>alunos impactados</small>
+      </div>
+      <div class="stat" data-animate="rise">
+        <span class="stat-number" data-count-to="93">0</span><small>%</small>
+        <small>concluem o método</small>
+      </div>
+      <div class="stat" data-animate="rise">
+        <span class="stat-number" data-count-to="21">0</span>
+        <small>dias até o 1º resultado</small>
+      </div>
+    </div>
+
+    <div class="testimonials" data-animate="stagger-group">
+      <figure class="testimonial">
+        <img src="assets/avatar-1.webp" alt="Foto de Camila R." loading="lazy" width="64" height="64">
+        <blockquote>Em 18 dias eu vi minha primeira virada de chave. Nunca tinha conseguido terminar um método antes.</blockquote>
+        <figcaption>Camila R.</figcaption>
+      </figure>
+      <figure class="testimonial">
+        <img src="assets/avatar-2.webp" alt="Foto de Diego M." loading="lazy" width="64" height="64">
+        <blockquote>O plano de 21 dias me deu o caminho que faltava. Direto ao ponto, sem enrolação.</blockquote>
+        <figcaption>Diego M.</figcaption>
+      </figure>
+      <figure class="testimonial">
+        <img src="assets/avatar-3.webp" alt="Foto de Larissa T." loading="lazy" width="64" height="64">
+        <blockquote>Os check-ins guiados foram o diferencial. Me senti acompanhada do início ao fim.</blockquote>
+        <figcaption>Larissa T.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 6. OFERTA E PREÇO -->
+  <section class="offer" id="oferta" data-section="offer">
+    <h2 class="section-title" data-animate="rise">Sua vaga na Turma de Julho</h2>
+
+    <div class="offer-card" data-animate="explode">
+      <div class="offer-badge">OFERTA DE LANÇAMENTO</div>
+      <p class="offer-price-old">De <s>R$ 1.997</s></p>
+      <p class="offer-price-new">Por <strong>12x R$ 47,70</strong> ou R$ 497 à vista</p>
+
+      <ul class="offer-bonus-list">
+        <li>✔ Acesso completo ao Método Acelerador</li>
+        <li>✔ Bônus 1: Templates de execução prontos</li>
+        <li>✔ Bônus 2: Grupo de check-in semanal</li>
+        <li>✔ Bônus 3: Sessão de diagnóstico individual</li>
+        <li>✔ Garantia incondicional de 7 dias</li>
+      </ul>
+
+      <a href="#" class="btn btn--primary btn--jump btn--lg" data-cta="offer">QUERO MINHA VAGA AGORA</a>
+      <p class="offer-microcopy">Pagamento seguro • Acesso imediato</p>
+    </div>
+  </section>
+
+  <!-- 7. URGÊNCIA / ESCASSEZ -->
+  <section class="urgency" data-section="urgency">
+    <h2 class="section-title section-title--light" data-animate="rise">As vagas estão acabando</h2>
+
+    <div class="urgency-countdown" data-countdown data-deadline="2026-07-07T23:59:59-03:00" data-animate="explode">
+      <div class="countdown-box pulse countdown-box--lg"><span data-unit="days">00</span><small>Dias</small></div>
+      <div class="countdown-box pulse countdown-box--lg"><span data-unit="hours">00</span><small>Horas</small></div>
+      <div class="countdown-box pulse countdown-box--lg"><span data-unit="minutes">00</span><small>Min</small></div>
+      <div class="countdown-box pulse countdown-box--lg"><span data-unit="seconds">00</span><small>Seg</small></div>
+    </div>
+
+    <div class="scarcity-bar" data-animate="rise">
+      <div class="scarcity-bar__track">
+        <div class="scarcity-bar__fill" data-scarcity-fill data-percent="82"></div>
+      </div>
+      <p><strong data-scarcity-count data-total="60" data-filled="49">49 de 60</strong> vagas já preenchidas</p>
+    </div>
+
+    <a href="#oferta" class="btn btn--primary btn--jump btn--lg" data-cta="urgency">GARANTIR ANTES QUE ACABE</a>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section class="faq" data-section="faq">
+    <h2 class="section-title" data-animate="rise">Perguntas frequentes</h2>
+
+    <div class="accordion" data-accordion>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          Funciona para quem está começando do zero?
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="accordion-panel">
+          <p>Sim. O Diagnóstico Rápido foi desenhado justamente para identificar seu ponto de partida e adaptar o plano de 21 dias ao seu nível atual.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          Quanto tempo por dia eu preciso dedicar?
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="accordion-panel">
+          <p>O plano foi estruturado para encaixar em rotinas reais: entre 30 e 60 minutos por dia já são suficientes para acompanhar todas as etapas.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          E se eu não tiver resultado?
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="accordion-panel">
+          <p>Você tem 7 dias de garantia incondicional. Se não fizer sentido para você, basta solicitar o reembolso, sem perguntas.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          Por quanto tempo eu tenho acesso?
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="accordion-panel">
+          <p>O acesso ao conteúdo, templates e atualizações é vitalício a partir da confirmação da sua matrícula.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 9. FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 Método Acelerador. Todos os direitos reservados.</p>
+    <nav class="footer-links">
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Contato</a>
+    </nav>
+    <a href="#oferta" class="btn btn--ghost" data-cta="footer">Garantir vaga</a>
+  </div>
+</footer>
+
+<!-- Player de áudio flutuante -->
+<button class="audio-toggle" data-audio-toggle aria-pressed="false" aria-label="Ativar som ambiente">
+  <svg viewBox="0 0 24 24" class="icon-sound-on"><path d="M4 9v6h4l5 5V4L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4Z" fill="currentColor"/></svg>
+  <svg viewBox="0 0 24 24" class="icon-sound-off"><path d="M4 9v6h4l5 5V4L8 9H4Zm12 1l4 4m0-4l-4 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+</button>
+
+<!-- Scripts (GSAP via CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>
